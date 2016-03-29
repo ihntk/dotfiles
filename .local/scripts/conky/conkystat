@@ -1,0 +1,16 @@
+ out_to_x no   
+ background no 
+ no_buffers yes
+ out_to_console yes
+ double_buffer yes
+ own_window yes                                         
+ own_window_type override
+ own_window_transparent yes
+ update_interval 1 
+ uppercase no  
+ use_spacer none
+ total_run_times 0
+               
+ TEXT          
+ #$moc_artist - $moc_album - $moc_song 
+tar xvf		|   $cpu%  |   ${memperc}%  |   ${battery_percent BAT1}%  |   ${exec amixer get Master|grep -o '[0-9]\{1,3\}%'}  |  ${exec ~/.local/scripts/getkbdlayout}  ${time %H:%M} 

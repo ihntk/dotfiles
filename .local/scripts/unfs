@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo umount /mnt/media
+
+sudo umount /mnt/backup

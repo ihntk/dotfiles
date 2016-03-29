@@ -1,0 +1,6 @@
+conky -c $HOME/.local/scripts/conky/.conkyrc -p 1
+#conky -c $HOME/.local/scripts/conky/.conkyframe -p 2
+#conky -c $HOME/.local/scripts/conky/db.conky
+#conky -c .conkyrclog -p 2
+#conky -c .conkyrccl -p 1
+#conky -c .conkyrc1 -p 1

@@ -1,0 +1,13 @@
+#!/bin/sh
+date=`date "+%Y-%m-%d-%H%M%S"`
+SRC=/home/igor
+DST=/media/Lily/backup/ssd_home
+
+rsync -ax \
+--delete \
+--link-dest=../Latest \
+$SRC $DST/Processing-$date \
+&& cd $DST \
+&& mv Processing-$date $date \
+&& rm -f Latest \
+&& ln -s $date Latest

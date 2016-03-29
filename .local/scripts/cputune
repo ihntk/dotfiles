@@ -1,0 +1,105 @@
+#!/bin/bash
+
+cpus=(`ls /sys/devices/system/cpu|grep -e 'cpu[0-9]\+'`)
+cpu0=${cpus[0]}
+cpuN=${#cpus[*]}
+
+min=`cat /sys/devices/system/cpu/${cpu0}/cpufreq/cpuinfo_min_freq`
+max=`cat /sys/devices/system/cpu/${cpu0}/cpufreq/cpuinfo_max_freq`
+
+function setGovernor {
+        for cpu in ${cpus[*]}; do
+                echo "${1}" > "/sys/devices/system/cpu/${cpu}/cpufreq/scaling_governor"
+        done
+}
+function toHZ {
+        i=$((${#1} - 1))
+        case "${1:$i:1}" in
+                'G' ) r=$((${1:0:$i} * 1000000)) ;;
+                'M' ) r=$((${1:0:$i} *    1000)) ;;
+                *   ) r="${1}" ;;
+        esac
+        echo -n $r
+}
+
+case "${1}" in
+        "power" )
+                setGovernor "powersave"
+        ;;
+
+        "half" )
+                setGovernor "ondemand"
+        ;;
+
+        "speed" )
+                setGovernor "performance"
+        ;;
+
+        "max" )
+                if [ -z "${2}" ]; then
+                        fr=${max}
+                else
+                        fr=`toHZ ${2}`
+                fi
+                for cpu in ${cpus[*]}; do
+                        echo "${fr}" > "/sys/devices/system/cpu/${cpu}/cpufreq/scaling_max_freq"
+                done
+        ;;
+
+        "min" )
+                if [ -z "${2}" ]; then
+                        fr=${min}
+                else
+                        fr=`toHZ ${2}`
+                fi
+                for cpu in ${cpus[*]}; do
+                        echo "${fr}" > "/sys/devices/system/cpu/${cpu}/cpufreq/scaling_min_freq"
+                done
+        ;;
+
+        "num" )
+                if [ -z "${2}" ]; then
+                        n=${cpuN}
+                else
+                        n=${2}
+                fi
+                for cpu in ${cpus[*]}; do
+                        if [ ${n} -gt 0 ]; then
+                                if [ -f "/sys/devices/system/cpu/${cpu}/online" ]; then
+                                        echo '1' > "/sys/devices/system/cpu/${cpu}/online"
+                                fi
+                                ((n --))
+                        else
+                                echo '0' > "/sys/devices/system/cpu/${cpu}/online"
+                        fi
+                done
+        ;;
+
+        "" )
+        ;;
+
+        * )
+                echo -n "CAPABILITIES: cpus: ${cpuN}, min freq: ${min}, max freq: ${max}, governors: "
+                cat "/sys/devices/system/cpu/${cpu0}/cpufreq/scaling_available_governors"
+                echo
+        ;;
+esac
+
+active=0
+for cpu in ${cpus[*]}; do
+        if [ -f "/sys/devices/system/cpu/${cpu}/online" ]; then
+                st=`cat "/sys/devices/system/cpu/${cpu}/online"`
+                if [ "${st}" = "1" ]; then
+                        ((active ++))
+                fi
+        else
+                ((active ++))
+        fi
+done
+
+
+min=`cat /sys/devices/system/cpu/${cpu0}/cpufreq/scaling_min_freq`
+max=`cat /sys/devices/system/cpu/${cpu0}/cpufreq/scaling_max_freq`
+echo -n "STATUS: cpus online: ${active}, min freq: ${min}, max freq: ${max}, governor: "
+cat "/sys/devices/system/cpu/${cpu0}/cpufreq/scaling_governor"
+cat /proc/cpuinfo  | grep 'MHz'

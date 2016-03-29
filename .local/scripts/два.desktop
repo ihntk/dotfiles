@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=два
+Comment=зовнішній дисплей зліва від основного
+Type=Application
+Exec=xrandr --output LVDS --auto --pos 0x0 --output VGA-0 --auto --left-of LVDS --pos 1366x0
+Icon=krdc
