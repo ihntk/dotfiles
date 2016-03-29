@@ -1,0 +1,1 @@
+/home/igor/.local/opt/doublecmd/doublecmd.sh
