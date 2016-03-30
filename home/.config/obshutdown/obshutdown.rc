@@ -9,7 +9,7 @@ version =        0.1-rc1
 verbose =        false
 default_action = shutdown
 composite =      true
-theme =          faenza
+theme =          foom
 buttons =        cancel logout shutdown restart suspend hibernate
 
 [actions]
