@@ -1,3 +1,7 @@
+# connect phone, type lsusb search phone and remember first part of id aaaa:bbbb.
+# make .android file in home directory, and add 0xaaaa to .android
+# and alse add aaaa to this file after idVendor.
+
 SUBSYSTEM=="usb", ATTR{idVendor}=="2717", MODE="0666" #Xiaomi Redmi 3 adb
 SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", MODE="0666" #Xiaomi Redmi 3 fastboot
 SUBSYSTEM=="usb", ATTR{idVendor}=="05c6", MODE="0666" #Xiaomi Redmi 3 download_mod
