@@ -22,7 +22,11 @@ Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
-colorscheme gruvbox 
+"colorscheme gruvbox 
+colorscheme desert 
 
-let g:airline_powerline_fonts = 1
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
+"airline
+"let g:airline_powerline_fonts = 1
+"let g:airline#extensions#tabline#enabled = 1
+
+"autocmd FileType java setlocal omnifunc=javacomplete#Complete
