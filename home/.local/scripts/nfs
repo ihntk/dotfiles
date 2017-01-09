@@ -1,5 +1,10 @@
 #!/bin/bash
 
-sudo mount -v -o nolock -t nfs pentium3:/home/media /mnt/media
+#sudo mount -v -o nolock -t nfs pentium3:/home/media /mnt/media
 
-sudo mount -o nolock -t nfs pentium3:/home/backup /mnt/backup
+#sudo mount -o nolock -t nfs pentium3:/home/backup /mnt/backup
+
+mount /mnt/media
+#mount /mnt/backup
+
+notify-send -i info "Сервер змонтовано"
