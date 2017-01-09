@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=System
+Comment[uk]=Монтування сервера
+Comment=Монтування сервера
+Exec=/home/igor/.local/scripts/nfs
+GenericName[uk]=
+GenericName=
+Icon=iso-mount
+MimeType=
+Name[uk]=ServerMount
+Name=ServerMount
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
