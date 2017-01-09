@@ -1,5 +1,10 @@
 #!/bin/bash
 
-sudo umount /mnt/media
+#sudo umount /mnt/media
 
-sudo umount /mnt/backup
+#sudo umount /mnt/backup
+
+umount /mnt/media
+#umount /mnt/backup
+
+notify-send -i info "Сервер відмонтовано"
