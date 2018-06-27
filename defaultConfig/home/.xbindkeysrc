@@ -1,0 +1,27 @@
+"xfce4-terminal"
+    m:0x40 + c:36
+    Mod4 + Return
+
+"xfce4-terminal --drop-down"
+    m:0x0 + c:96
+    F12
+
+"thunar"
+    m:0x44 + c:28
+    Control+Mod4 + t
+
+"deadbeef %F"
+    m:0x44 + c:40
+    Control+Mod4 + d
+
+"firefox"
+    m:0x44 + c:41
+    Control+Mod4 + f
+
+"sublime_text"
+    m:0x44 + c:39
+    Control+Mod4 + s
+
+"xfce4-screenshooter"
+    m:0x0 + c:107
+    Print

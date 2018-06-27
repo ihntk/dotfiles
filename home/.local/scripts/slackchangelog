@@ -1,8 +1,0 @@
-#!/bin/bash
-
-cd ~/scripts/log/sl14/
-rm ./*
-wget ftp://ftp.osuosl.org/pub/slackware/slackware64-14.0/ChangeLog.txt
-cd ~/scripts/log/slcur/
-rm ./*
-wget ftp://ftp.osuosl.org/pub/slackware/slackware64-current/ChangeLog.txt

@@ -1,2 +1,0 @@
-#!/bin/sh
-/usr/bin/q4wine-cli  -p "Default" -d "system"  -i "FlutoMAX"

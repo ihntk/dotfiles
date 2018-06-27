@@ -1,4 +1,0 @@
-#!/bin/bash
-killall firefox
-sleep .2
-firefox

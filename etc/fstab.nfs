@@ -1,3 +1,0 @@
-
-pentium3:/mnt/media /mnt/media nfs user,noauto,rw,nolock,addr=192.168.1.100 0 0
-pentium3:/mnt/backup /mnt/backup nfs user,noauto,rw,nolock,addr=192.168.1.100 0 0

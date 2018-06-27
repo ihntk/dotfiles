@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=Fluxbox Session
-Name[uk]=Сеанс Fluxbox
-Comment=Use this session to run Fluxbox as your desktop environment
-Comment[uk]=Використайте цей сеанс для запуску Fluxbox як Вашого типого середовища.
-Exec=startfluxbox
-Icon=
-Type=Application

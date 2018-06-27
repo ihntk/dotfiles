@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=Kde Session
-Name[uk]=Сеанс Kde
-Comment=Use this session to run Kde as your desktop environment
-Comment[uk]=Використайте цей сеанс для запуску Kde як Вашого типого середовища.
-Exec=startkde
-Icon=
-Type=Application

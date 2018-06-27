@@ -1,8 +1,0 @@
-[Desktop Entry]
-Encoding=UTF-8
-Version=1.0
-Name=внутрішній
-Comment=дисплей лептопа
-Type=Application
-Exec=xrandr --output LVDS --auto --output VGA-0 --off
-Icon=kontact-import-wizard
