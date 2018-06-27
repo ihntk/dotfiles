@@ -1,0 +1,16 @@
+[Compositing]
+OpenGLIsUnsafe=false
+
+[Desktops]
+Number=1
+
+[Plugins]
+wobblywindowsEnabled=true
+
+[org.kde.kdecoration2]
+BorderSize=Normal
+ButtonsOnLeft=XIA
+ButtonsOnRight=HSM
+CloseOnDoubleClickOnMenu=false
+library=org.kde.kwin.aurorae
+theme=__aurorae__svg__Breezemite

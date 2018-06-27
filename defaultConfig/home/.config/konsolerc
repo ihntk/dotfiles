@@ -1,0 +1,14 @@
+[Desktop Entry]
+DefaultProfile=Profile 1.profile
+
+[Favorite Profiles]
+Favorites=
+
+[MainWindow]
+Height 900=396
+State=
+ToolBarsMovable=Disabled
+Width 1600=645
+
+[TabBar]
+TabBarVisibility=ShowTabBarWhenNeeded
