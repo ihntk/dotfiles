@@ -1,2 +1,5 @@
 [MainWindow]
 MenuBar=Disabled
+
+[General]
+GlobalViewProps=true
