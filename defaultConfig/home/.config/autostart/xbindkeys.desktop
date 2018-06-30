@@ -5,7 +5,6 @@ Type=Application
 Name=xbindkeys
 Comment=Keyboard shortcuts
 Exec=xbindkeys
-OnlyShowIn=XFCE;
 StartupNotify=false
 Terminal=false
 Hidden=false
