@@ -1,0 +1,2 @@
+#!/bin/bash
+/home/igor/packages/iso/mirror-slackware-current.sh -o NONE
