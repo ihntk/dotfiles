@@ -5,3 +5,5 @@ export TERM=xterm-256color
 export JAVA_FONTS=/usr/share/fonts/TTF
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
 
+# note: for root user enough to live EDITOR variable only
+
