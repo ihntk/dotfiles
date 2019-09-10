@@ -1,0 +1,51 @@
+
+#!/bin/bash
+
+# /etc/rc.d/rc.rtorrent
+# Runs rtorrent inside tmux session under user who started the script.
+# Usage: /etc/rc.d/rc.rtorrent start|stop|restart
+#
+# To run this script from rc.local you must run it as a non-root user.
+#
+# Example:
+# /bin/su - user -c "/etc/rc.d/rc.rtorrent start"
+
+if [ "$USER" = "root" ] && [[ "$1" =~ start ]]; then
+    echo "Do not start the daemon as root." >/dev/stderr
+    exit 1
+fi
+
+rtorrent_start() {
+  if [ `pgrep rtorrent > /dev/null; echo $?` -ne 0 ]; then
+    echo Start rTorrent daemon...
+	  rm /home/$USER/.local/share/rtorrent/rtorrent.lock
+      tmux new -s rtorrent -d /usr/bin/rtorrent &> /dev/null
+    else
+      echo rTorrent already running...
+    fi
+}
+
+rtorrent_stop() {
+  echo Stop rTorrent daemon...
+  killall -w -s 2 /usr/bin/rtorrent &> /dev/null
+}
+
+rtorrent_restart() {
+    $0 stop
+    sleep 1
+    $0 start
+}
+
+case "$1" in
+'start')
+  rtorrent_start
+  ;;
+'stop')
+  rtorrent_stop
+  ;;
+'restart')
+  rtorrent_restart
+  ;;
+*)
+  echo "usage: $0 {start|stop|restart}"
+esac

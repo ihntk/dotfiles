@@ -1,0 +1,13 @@
+# Copy to ~/.rtorrent.rc
+session.path.set = ./.local/share/rtorrent
+
+schedule2 = watch_directory_1,10,10,"load.start=./Downloads/tor/music/*.torrent,d.directory.set=./Music"
+schedule2 = watch_directory_2,10,10,"load.start=./Downloads/tor/packages/*.torrent,d.directory.set=./packages"
+schedule2 = watch_directory_3,10,10,"load.start=./Downloads/tor/packages/win*.torrent,d.directory.set=./packages/win"
+schedule2 = watch_directory_4,10,10,"load.start=./Downloads/tor/videos/films/*.torrent,d.directory.set=./Videos/Films"
+schedule2 = watch_directory_5,10,10,"load.start=./Downloads/tor/videos/mult/*.torrent,d.directory.set=./Videos/Cartoons"
+schedule2 = watch_directory_6,10,10,"load.start=./Downloads/tor/videos/series/*.torrent,d.directory.set=./Videos/Series"
+
+schedule2 = low_diskspace,5,60,close_low_diskspace=1000M
+
+pieces.hash.on_completion.set = yes
