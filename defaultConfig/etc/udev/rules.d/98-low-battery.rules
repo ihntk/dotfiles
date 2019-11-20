@@ -1,0 +1,2 @@
+# Halt the system when battery level drops to 75% or lower
+SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-75]", RUN+="/sbin/halt" 
