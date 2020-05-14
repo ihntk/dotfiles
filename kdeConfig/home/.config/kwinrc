@@ -2,10 +2,14 @@
 OpenGLIsUnsafe=false
 
 [Desktops]
-Number=1
+Number=9
+Rows=3
 
 [Plugins]
 wobblywindowsEnabled=true
+
+[TabBox]
+ShowTabBox=false
 
 [org.kde.kdecoration2]
 BorderSize=Normal
