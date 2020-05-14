@@ -1,3 +1,7 @@
 
 [Appmenu Style]
 Style=Widget
+
+[Toolbar style]
+ToolButtonStyle=NoText
+ToolButtonStyleOtherToolbars=NoText
