@@ -1,0 +1,11 @@
+[AC]
+icon=battery-charging
+
+[AC][DPMSControl]
+idleTime=900
+
+[AC][HandleButtonEvents]
+lidAction=1
+powerButtonAction=16
+triggerLidActionWhenExternalMonitorPresent=false
+
