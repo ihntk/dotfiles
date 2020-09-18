@@ -1,6 +1,6 @@
-[user]
-	name = Igor 
-	email = 
+# [user]
+# 	name = Igor 
+# 	email = 
 [core]
 	autocrlf = input
 	safecrlf = true
