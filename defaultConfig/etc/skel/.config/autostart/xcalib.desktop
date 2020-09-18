@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Version=1.0
-Name=xcalib
-Exec=~/.local/scripts/xcalibProfile.sh
-StartupNotify=false
-Terminal=false

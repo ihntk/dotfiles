@@ -1,2 +1,0 @@
-#!/bin/bash
-rm ~/{Timing1.plot,Timing4.plot,Timing2.plot,Timing5.plot,JackEngineProfiling.log,Timing3.plot,Timings.html,generate_timings} > /dev/null

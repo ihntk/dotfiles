@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=xcalib
+Exec=xcalib -s LVDS1 /usr/share/xcalib/Monitor_14.09.2012_1_03.icc
+StartupNotify=false
+Terminal=false

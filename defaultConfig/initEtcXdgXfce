@@ -1,0 +1,2 @@
+#!/bin/bash
+sh -c "sed -i 's/menu:minimize,maximize,close/close,minimize,maximize:menu/g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"

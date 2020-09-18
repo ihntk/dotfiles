@@ -1,2 +1,0 @@
-#!/bin/bash
-mkdir -p {Desktop,documents,Downloads,Music,Pictures,Public,Videos}
