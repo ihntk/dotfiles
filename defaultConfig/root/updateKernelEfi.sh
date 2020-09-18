@@ -1,1 +1,0 @@
-/home/igor/.local/scripts/updateKernelEfi.sh
