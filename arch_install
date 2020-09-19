@@ -61,8 +61,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 cp -r ../$INSDIR /mnt/root/
 arch-chroot /mnt /bin/bash
-cd /root/$INSDIR
-sh ./02-setupChroot.sh
+
 EOF
 
 
@@ -107,7 +106,7 @@ systemctl enable NetworkManager
 
 cd /root
 chown -hR :users $INSDIR
-ln -l $INSDIR /home/$USERNAME/Public/
+ln -s $INSDIR /home/$USERNAME/
 
 EOF
 
@@ -128,6 +127,7 @@ yay -Syu vala-panel-appmenu-xfce-git lightdm-slick-greeter
 systemctl enable lightdm
 
 sudo rm -r /root/$INSDIR
+
 EOF
 
 rm arch_install
