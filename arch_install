@@ -32,9 +32,9 @@ cat > 01-install.sh << EOF
 #!/bin/sh
 
 	# Wipe the MBR:
-  	# dd if=/dev/zero of=$TOWIPE bs=512 count=1
+  	# dd if=/dev/zero of=/dev/sdw bs=512 count=1
 
-	# /sbin/fdisk /des/sdw <<EOf
+	# /sbin/fdisk /dev/sdw << EOf
 	# g
 	# n
 	# 1
@@ -47,7 +47,7 @@ cat > 01-install.sh << EOF
 
 
 	# w
-	# EOf
+# EOf
 
 # mkfs.ext4 /dev/sdw2
 mount /dev/sdw2 /mnt
@@ -59,7 +59,7 @@ mount /dev/sdw1 /mnt/boot/efi
 pacstrap -i /mnt base linux-lts linux-firmware grub efibootmgr terminus-font networkmanager sudo neovim zsh
 genfstab -U /mnt >> /mnt/etc/fstab
 
-cp -r $INSDIR /mnt/root/
+cp -r ../$INSDIR /mnt/root/
 arch-chroot /mnt /bin/bash
 cd /root/$INSDIR
 sh ./02-setupChroot.sh
