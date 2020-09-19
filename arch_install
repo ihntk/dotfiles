@@ -1,0 +1,133 @@
+#!/bin/sh
+
+# arch install
+# https://dimanao.org/ustanovka-arch-linux-uefi-grub/
+# https://wiki.archlinux.org/index.php/Installation_guide
+
+# 	- замінити sdw на потрібний диск
+# 	- замінити користувача (3 рази) і його ID
+# 	- замінити паролі
+# 	- підставити потрібний графічний драйвер
+# 	- прослідкувати відповідність розділів на диску
+
+# 	визначаємо драйвер відеокарти і підставляємо в уcтановку X 
+# 	lspci | grep -e VGA -e 3D
+
+# перевіряємо ping
+# запускаємо fdisk
+
+INSDIR="archInstaller"
+USERNAME="ih"
+PASSPHRASE="af"
+
+mkdir $INSDIR
+cd $INSDIR
+
+
+############
+# Install script
+###
+
+cat > 01-install.sh << EOF
+#!/bin/sh
+
+	# Wipe the MBR:
+  	# dd if=/dev/zero of=$TOWIPE bs=512 count=1
+
+	# /sbin/fdisk /des/sdw <<EOf
+	# g
+	# n
+	# 1
+
+	# +20M
+	# t
+	# 1
+	# n
+	# 2
+
+
+	# w
+	# EOf
+
+# mkfs.ext4 /dev/sdw2
+mount /dev/sdw2 /mnt
+
+# mkfs.fat -F32 /dev/sdw1
+mkdir -p /mnt/boot/efi
+mount /dev/sdw1 /mnt/boot/efi
+
+pacstrap -i /mnt base linux-lts linux-firmware grub efibootmgr terminus-font networkmanager sudo neovim zsh
+genfstab -U /mnt >> /mnt/etc/fstab
+
+cp -r $INSDIR /mnt/root/
+arch-chroot /mnt /bin/bash
+cd /root/$INSDIR
+sh ./02-setupChroot.sh
+EOF
+
+
+############
+# Config script
+###
+
+cat > 02-setupChroot.sh << EOF
+#!/usr/bin/env bash
+
+echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && echo "uk_UA.UTF-8 UTF-8" >> /etc/locale.gen
+locale-gen
+echo "LANG=uk_UA.UTF-8" > /etc/locale.conf
+echo "FONT=ter-v16n" > /etc/vconsole.conf
+# echo -e "MODULES=(btrfs nvme nvidia)\nHOOKS=(autodetect systemd)\nCOMPRESSION=\"cat\"" > /etc/mkinitcpio.conf
+# mkinitcpio -p linux-lts # Создание образа ранней загрузки
+echo "archlinux" > /etc/hostname # Задаём имя компьютера
+ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
+hwclock --systohc --localtime # hwclock --systohc --utc (для установки одной системы)
+grub-install /dev/sdw
+grub-mkconfig -o /boot/grub/grub.cfg
+# efibootmgr -d /dev/nvme0n1 -p 1 -c -L "Arch Linux" -l /vmlinuz-linux -u "root=/dev/nvme0n1p2 rw quiet rootflags=subvol=@root initrd=/intel-ucode.img initrd=/initramfs-linux.img"
+# sh -c "sed -i '/\[multilib\]/,/Include/s/^[ ]*#//' /etc/pacman.conf"
+echo "root:$PASSPHRASE" | chpasswd # Пароль для суперпользователя
+useradd -m -g users -G wheel -u 1000 -s /bin/zsh $USERNAME # Создание нового пользователя
+echo "$USERNAME:$PASSPHRASE" | chpasswd # Пароль для пользователя
+sh -c "sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers"
+pacman -Syu tree mc --noconfirm --noprogressbar --quiet
+pacman -S noto-fonts ttf-hack termite lightdm xorg-server xf86-video- --noconfirm --noprogressbar --quiet# vmware intel amdgpu ati nouveau xorg-drivers Установка X.Org
+pacman -S network-manager-applet exo garcon thunar thunar-volman tumbler xfce4-appfinder xfce4-panel \
+xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 thunar-archive-plugin xarchiver \
+thunar-media-tags-plugin xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver \
+xfce4-screenshooter xfce4-whiskermenu-plugin xfce4-xkb-plugin catfish --noconfirm --noprogressbar --quiet
+pacman -S --needed base-devel git --noconfirm --noprogressbar --quiet
+
+git clone https://aur.archlinux.org/yay.git
+git clone https://Igor-slacker@bitbucket.org/Igor-slacker/dotfiles.git
+cp -r dotfiles/defaultConfig/{etc,root,usr} /
+sh dotfiles/defaultConfig/initEtcXdgXfce
+
+systemctl enable NetworkManager
+
+cd /root
+chown -hR :users $INSDIR
+ln -l $INSDIR /home/$USERNAME/Public/
+
+EOF
+
+# pacman -S nvidia nvidia-settings nvidia-utils opencl-nvidia opencl-headers lib32-nvidia-utils lib32-opencl-nvidia --noconfirm --noprogressbar --quiet # Установка драйверов Nvidia
+# pacman -S pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils --noconfirm --noprogressbar --quiet # Установка Alsa
+
+
+############
+# Config $PASSPHRASEter install
+###
+cat > 03-setup$INSDIR.sh << EOF
+
+cd yay
+makepkg -si
+cd ..
+yay -Syu vala-panel-appmenu-xfce-git lightdm-slick-greeter
+
+systemctl enable lightdm
+
+sudo rm -r /root/$INSDIR
+EOF
+
+rm arch_install
