@@ -4,8 +4,9 @@
 # https://dimanao.org/ustanovka-arch-linux-uefi-grub/
 # https://wiki.archlinux.org/index.php/Installation_guide
 
+#	- розкоментувати форматування, якщо потрібно
 # 	- замінити sdw на потрібний диск
-# 	- замінити користувача (3 рази) і його ID
+# 	- замінити користувача і його ID
 # 	- замінити паролі
 # 	- підставити потрібний графічний драйвер
 # 	- прослідкувати відповідність розділів на диску
@@ -106,7 +107,7 @@ systemctl enable NetworkManager
 
 cd /root
 chown -hR :users $INSDIR
-ln -s $INSDIR /home/$USERNAME/
+ln -s /root/$INSDIR /home/$USERNAME/
 
 EOF
 
@@ -130,4 +131,4 @@ sudo rm -r /root/$INSDIR
 
 EOF
 
-rm arch_install
+rm ../arch_install
