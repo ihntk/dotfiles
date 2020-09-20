@@ -61,6 +61,7 @@ pacstrap -i /mnt base linux-lts linux-firmware grub efibootmgr terminus-font net
 genfstab -U /mnt >> /mnt/etc/fstab
 
 cp -r ../$INSDIR /mnt/root/
+echo "go to /root/$INSDIR"
 arch-chroot /mnt /bin/bash
 
 EOF
@@ -87,15 +88,13 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # efibootmgr -d /dev/nvme0n1 -p 1 -c -L "Arch Linux" -l /vmlinuz-linux -u "root=/dev/nvme0n1p2 rw quiet rootflags=subvol=@root initrd=/intel-ucode.img initrd=/initramfs-linux.img"
 # sh -c "sed -i '/\[multilib\]/,/Include/s/^[ ]*#//' /etc/pacman.conf"
 echo "root:$PASSPHRASE" | chpasswd # Пароль для суперпользователя
-useradd -m -g users -G wheel -u 1000 -s /bin/zsh $USERNAME # Создание нового пользователя
-echo "$USERNAME:$PASSPHRASE" | chpasswd # Пароль для пользователя
-sh -c "sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers"
+
 pacman -Syu tree mc --noconfirm --noprogressbar --quiet
-pacman -S noto-fonts ttf-hack termite lightdm xorg-server xf86-video- --noconfirm --noprogressbar --quiet# vmware intel amdgpu ati nouveau xorg-drivers Установка X.Org
+pacman -S noto-fonts ttf-hack termite lightdm xorg-server xf86-video- --noconfirm --noprogressbar --quiet # vmware intel amdgpu ati nouveau xorg-drivers Установка X.Org
 pacman -S network-manager-applet exo garcon thunar thunar-volman tumbler xfce4-appfinder xfce4-panel \
 xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 thunar-archive-plugin xarchiver \
 thunar-media-tags-plugin xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver \
-xfce4-screenshooter xfce4-whiskermenu-plugin xfce4-xkb-plugin catfish --noconfirm --noprogressbar --quiet
+xfce4-screenshooter xfce4-whiskermenu-plugin xfce4-xkb-plugin gvfs plank catfish --noconfirm --noprogressbar --quiet
 pacman -S --needed base-devel git --noconfirm --noprogressbar --quiet
 
 git clone https://aur.archlinux.org/yay.git
@@ -103,11 +102,16 @@ git clone https://Igor-slacker@bitbucket.org/Igor-slacker/dotfiles.git
 cp -r dotfiles/defaultConfig/{etc,root,usr} /
 sh dotfiles/defaultConfig/initEtcXdgXfce
 
+useradd -m -g users -G wheel -u 1000 -s /bin/zsh $USERNAME # Создание нового пользователя
+echo "$USERNAME:$PASSPHRASE" | chpasswd # Пароль для пользователя
+sh -c "sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers"
+
 systemctl enable NetworkManager
 
 cd /root
-chown -hR :users $INSDIR
-ln -s /root/$INSDIR /home/$USERNAME/
+mv /root/$INSDIR /home/$USERNAME/
+chown -hR $USERNAME:users /home/$USERNAME/$INSDIR
+chsh -s /bin/zsh
 
 EOF
 
