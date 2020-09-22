@@ -122,6 +122,8 @@ sh -c "sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers"
 systemctl enable NetworkManager
 systemctl enable lightdm
 
+rm /etc/udev/rules.d/99-mount-2media.rules
+
 cd /root
 mv /root/$INSDIR /home/$USERNAME/
 chown -hR $USERNAME:users /home/$USERNAME/$INSDIR
