@@ -93,19 +93,26 @@ grub-mkconfig -o /boot/grub/grub.cfg
 echo "root:$PASSPHRASE" | chpasswd # Пароль для суперпользователя
 
 pacman -Syu tree mc git --noconfirm --noprogressbar --quiet
-pacman -S noto-fonts ttf-hack termite lightdm-gtk-greeter-settings xorg-server xf86-video- --noconfirm --noprogressbar --quiet # vmware intel amdgpu ati nouveau xorg-drivers
+
+pacman -S noto-fonts ttf-hack termite lightdm-gtk-greeter-settings gtk-engines gtk-engine-murrine \
+xorg-server xf86-video- --noconfirm --noprogressbar --quiet # vmware intel amdgpu ati nouveau xorg-drivers
+
 pacman -S pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils --noconfirm --noprogressbar --quiet
+
 pacman -S network-manager-applet exo garcon thunar thunar-volman tumbler xfce4-appfinder xfce4-panel \
 xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 thunar-archive-plugin \
 thunar-media-tags-plugin xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver \
-xfce4-screenshooter xfce4-whiskermenu-plugin xfce4-xkb-plugin gvfs plank catfish file-roller \
-p7zip unrar viewnior --noconfirm --noprogressbar --quiet
+xfce4-screenshooter xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin gvfs plank \
+catfish file-roller p7zip unrar viewnior --noconfirm --noprogressbar --quiet
+
 # pacman -S --needed base-devel --noconfirm --noprogressbar --quiet
 
 # git clone https://aur.archlinux.org/yay.git
 git clone https://Igor-slacker@bitbucket.org/Igor-slacker/dotfiles.git
 cp -r dotfiles/defaultConfig/{etc,root,usr} /
 sh dotfiles/defaultConfig/initEtcXdgXfce
+
+
 
 useradd -m -g users -G wheel $MEDIA_GROUP -s /bin/zsh $USERNAME # Создание нового пользователя
 echo "$USERNAME:$PASSPHRASE" | chpasswd # Пароль для пользователя
