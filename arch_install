@@ -11,6 +11,7 @@
 #	- розкоментувати групу медіа
 # 	- підставити потрібний графічний драйвер
 # 	- прослідкувати відповідність розділів на диску
+#	- install appmenu
 
 # 	визначаємо драйвер відеокарти і підставляємо в уcтановку X 
 # 	lspci | grep -e VGA -e 3D
@@ -125,6 +126,7 @@ cd /root
 mv /root/$INSDIR /home/$USERNAME/
 chown -hR $USERNAME:users /home/$USERNAME/$INSDIR
 chsh -s /bin/zsh
+echo "install appmenu"
 
 EOF
 
