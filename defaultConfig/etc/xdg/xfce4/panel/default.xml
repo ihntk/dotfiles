@@ -14,6 +14,7 @@
         <value type="int" value="9"/>
         <value type="int" value="2"/>
         <value type="int" value="3"/>
+        <value type="int" value="10"/>
         <value type="int" value="4"/>
         <value type="int" value="5"/>
         <value type="int" value="6"/>
@@ -28,13 +29,15 @@
       <property name="style" type="uint" value="0"/>
       <property name="expand" type="bool" value="true"/>
     </property>
-    <property name="plugin-3" type="string" value="xkb-plugin"/>
+    <property name="plugin-3" type="string" value="xkb"/>
     <property name="plugin-4" type="string" value="systray">
       <property name="show-frame" type="bool" value="false"/>
     </property>
     <property name="plugin-5" type="string" value="pulseaudio"/>
     <property name="plugin-6" type="string" value="power-manager-plugin"/>
-    <property name="plugin-7" type="string" value="clock"/>
+    <property name="plugin-7" type="string" value="clock">
+      <property name="digital-format" type="string" value="%R"/>
+    </property>
     <property name="plugin-8" type="string" value="actions">
       <property name="appearance" type="uint" value="0"/>
       <property name="items" type="array">
@@ -52,5 +55,6 @@
       </property>
     </property>
     <property name="plugin-9" type="string" value="appmenu"/>
+    <property name="plugin-10" type="string" value="xfce4-clipman-plugin"/>
   </property>
 </channel>
