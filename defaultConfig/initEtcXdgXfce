@@ -1,2 +1,3 @@
 #!/bin/bash
 sh -c "sed -i 's/menu:minimize,maximize,close/close,minimize,maximize:menu/g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
+sh -c "sed -i 's/TerminalEmulator=xfce4-terminal/TerminalEmulator=termite/' /etc/xdg/xfce4/helpers.rc"
