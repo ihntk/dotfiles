@@ -29,7 +29,10 @@
       <property name="style" type="uint" value="0"/>
       <property name="expand" type="bool" value="true"/>
     </property>
-    <property name="plugin-3" type="string" value="xkb"/>
+    <property name="plugin-3" type="string" value="xkb">
+      <property name="display-type" type="uint" value="1"/>
+      <property name="display-name" type="uint" value="1"/>
+    </property>
     <property name="plugin-4" type="string" value="systray">
       <property name="show-frame" type="bool" value="false"/>
     </property>
