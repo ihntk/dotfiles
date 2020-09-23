@@ -10,6 +10,7 @@
 # 	- замінити паролі
 # 	- підставити потрібний графічний драйвер
 #	- опції монтування для SSD
+#	- замінити hostname і domain
 # 	- прослідкувати відповідність розділів на диску
 #	- годинник в utc
 
@@ -23,8 +24,8 @@
 
 INSDIR="archInstaller"
 USERNAME="ih"
-PASSPHRASE="af"
 USER_ID="" # -u 1000
+PASSPHRASE="af"
 CONSOLE_FONT="ter-v16n" # ter-v18b for leptop
 SSD="" # discard
 HOST_NAME="archlinux"
@@ -100,20 +101,20 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # sh -c "sed -i '/\[multilib\]/,/Include/s/^[ ]*#//' /etc/pacman.conf"
 echo "root:$PASSPHRASE" | chpasswd # Пароль для суперпользователя
 
+# vmware intel amdgpu ati nouveau xorg-drivers
 pacman -S tree mc git \
-#
 noto-fonts ttf-hack termite lightdm-gtk-greeter-settings gtk-engines gtk-engine-murrine \
-xorg-server xf86-video- \ # vmware intel amdgpu ati nouveau xorg-drivers
-#
+xorg-server xf86-video- \
 pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils \
-#
-firefox-i18n-uk \
-#
+--noconfirm --noprogressbar --quiet
+
+pacman -S firefox-i18n-uk \
 network-manager-applet exo garcon thunar thunar-volman tumbler xfce4-appfinder xfce4-panel \
 xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 thunar-archive-plugin \
 thunar-media-tags-plugin xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver \
 xfce4-screenshooter xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin gvfs plank \
-catfish file-roller p7zip unrar viewnior appmenu-gtk-module --noconfirm --noprogressbar --quiet
+catfish file-roller p7zip unrar viewnior appmenu-gtk-module \
+--noconfirm --noprogressbar --quiet
 
 # pacman -S --needed base-devel --noconfirm --noprogressbar --quiet
 
