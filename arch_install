@@ -30,6 +30,8 @@ CONSOLE_FONT="ter-v16n" # ter-v18b for leptop
 SSD="" # discard
 HOST_NAME="archlinux"
 DOMAIN="vbox"
+THEMING="# "
+ADD_INSTALL="# "
 
 mkdir $INSDIR
 cd $INSDIR
@@ -70,7 +72,8 @@ mount -o $SSD,noatime /dev/sdw1 /mnt/boot/efi
 pacstrap -i /mnt base linux-lts linux-firmware grub grub-theme-vimix efibootmgr terminus-font networkmanager sudo neovim zsh
 genfstab -U /mnt >> /mnt/etc/fstab
 
-cp -r ../$INSDIR /mnt/root/
+mv ../$INSDIR /mnt/root/
+# cp -r ../$INSDIR /mnt/root/
 echo "go to /root/$INSDIR"
 arch-chroot /mnt /bin/bash
 
@@ -106,9 +109,7 @@ pacman -S tree mc git \
 noto-fonts ttf-hack termite lightdm-gtk-greeter-settings gtk-engines gtk-engine-murrine \
 xorg-server xf86-video- \
 pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils \
---noconfirm --noprogressbar --quiet
-
-pacman -S firefox-i18n-uk \
+firefox-i18n-uk \
 network-manager-applet exo garcon thunar thunar-volman tumbler xfce4-appfinder xfce4-panel \
 xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 thunar-archive-plugin \
 thunar-media-tags-plugin xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver \
@@ -116,28 +117,25 @@ xfce4-screenshooter xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-p
 catfish file-roller p7zip unrar viewnior appmenu-gtk-module \
 --noconfirm --noprogressbar --quiet
 
-# pacman -S --needed base-devel --noconfirm --noprogressbar --quiet
-
-# git clone https://aur.archlinux.org/yay.git
 git clone https://Igor-slacker@bitbucket.org/Igor-slacker/dotfiles.git
 cp -r dotfiles/defaultConfig/{etc,root,usr} /
 sh dotfiles/defaultConfig/initEtcXdgXfce
 
-
+$THEMINGsh 03-setupThemes.sh
+$ADD_INSTALLsh 04-additionalInstall.sh
 
 useradd -m -g users -G wheel $USER_ID -s /bin/zsh $USERNAME # Создание нового пользователя
 echo "$USERNAME:$PASSPHRASE" | chpasswd # Пароль для пользователя
 sh -c "sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers"
 
 sh -c "sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf"
-echo -e "icon-theme-name = breeze_cursors\n" >> /etc/lightdm/lightdm-gtk-greeter.conf
+echo -e "cursor-theme-name = breeze_cursors\n" >> /etc/lightdm/lightdm-gtk-greeter.conf
 
 systemctl enable NetworkManager
 systemctl enable lightdm
 
-rm /etc/udev/rules.d/99-mount-2media.rules
-
 cd /root
+rm $INSDIR/{01-install.sh,02-setupChroot.sh}
 mv /root/$INSDIR /home/$USERNAME/
 chown -hR $USERNAME:users /home/$USERNAME/$INSDIR
 chsh -s /bin/zsh
@@ -149,19 +147,42 @@ EOF
 
 
 ############
-# Config $PASSPHRASEter install
+# Config themes
 ###
-cat > 03-setup$INSDIR.sh << EOF
 
-cd yay
-makepkg -si
-cd ..
-yay -Syu vala-panel-appmenu-xfce-git lightdm-slick-greeter
+cat > 03-setupThemes.sh << EOF
 
-systemctl enable lightdm
+#!/bin/bash
 
-sudo rm -r /root/$INSDIR
+echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xfwm4" version="1.0">\n  <property name="general" type="empty">\n    <property name="theme" type="string" value="Mojave-light"/>\n  </property>\n</channel>\n' > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml
+echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xsettings" version="1.0">\n  <property name="Net" type="empty">\n    <property name="ThemeName" type="string" value="Mojave-light"/>\n    <property name="IconThemeName" type="string" value="Luna-Light"/>\n  </property>\n</channel>\n' > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
+echo -e 'theme-name = Mojave-light\nbackground = #204a87\nicon-theme-name = Luna-Light\nposition = 50%,end 50%,start\n' >> /etc/lightdm/lightdm-gtk-greeter.conf
+
+tar -C /usr/share/icons/ -xvf Luna-Icons.tar.xz Luna Luna-Light
+tar -C /usr/share/themes/ -xvf Mojave-light.tar.xz
 
 EOF
 
+
+############
+# Config after install
+###
+
+cat > 04-additionalInstall.sh << EOF
+
+#!/bin/bash
+
+# pacman -S --needed base-devel --noconfirm --noprogressbar --quiet
+# git clone https://aur.archlinux.org/yay.git
+# cd yay
+# makepkg -si
+# cd ..
+# yay -Syu vala-panel-appmenu-xfce-git lightdm-slick-greeter
+
+pacman -U vala-panel-appmenu*
+
+EOF
+
+
 rm ../arch_install
+cp ../* $INSDIR/
