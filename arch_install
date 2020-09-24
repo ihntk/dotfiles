@@ -27,9 +27,11 @@ USERNAME="ih"
 USER_ID="" # -u 1000
 PASSPHRASE="af"
 CONSOLE_FONT="ter-v16n" # ter-v18b for leptop
+VDRIVER="vmware" # vmware intel amdgpu ati nouveau xorg-drivers
 SSD="" # discard
 HOST_NAME="archlinux"
 DOMAIN="vbox"
+LOCAL_TIME="--localtime"
 THEMING="# "
 ADD_INSTALL="# "
 
@@ -97,17 +99,16 @@ echo "$HOST_NAME" > /etc/hostname # Задаём имя компьютера
 echo -e "127.0.0.1	localhost\n::1		localhost\n127.0.1.1	$HOST_NAME.$DOMAIN	$HOST_NAME" > /etc/hosts
 echo "GRUB_THEME=/usr/share/grub/themes/Vimix/theme.txt" >> /etc/default/grub
 ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
-hwclock --systohc --localtime # hwclock --systohc --utc (для установки одной системы)
+hwclock --systohc $LOCAL_TIME # hwclock --systohc --utc (для установки одной системы)
 grub-install /dev/sdw
 grub-mkconfig -o /boot/grub/grub.cfg
 # efibootmgr -d /dev/nvme0n1 -p 1 -c -L "Arch Linux" -l /vmlinuz-linux -u "root=/dev/nvme0n1p2 rw quiet rootflags=subvol=@root initrd=/intel-ucode.img initrd=/initramfs-linux.img"
 # sh -c "sed -i '/\[multilib\]/,/Include/s/^[ ]*#//' /etc/pacman.conf"
 echo "root:$PASSPHRASE" | chpasswd # Пароль для суперпользователя
 
-# vmware intel amdgpu ati nouveau xorg-drivers
 pacman -S tree mc git \
 noto-fonts ttf-hack termite lightdm-gtk-greeter-settings gtk-engines gtk-engine-murrine \
-xorg-server xf86-video- \
+xorg-server xf86-video-$VDRIVER \
 pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils \
 firefox-i18n-uk \
 network-manager-applet exo garcon thunar thunar-volman tumbler xfce4-appfinder xfce4-panel \
