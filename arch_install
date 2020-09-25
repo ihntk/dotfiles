@@ -32,8 +32,8 @@ SSD="" # discard
 HOST_NAME="archlinux"
 DOMAIN="vbox"
 LOCAL_TIME="--localtime"
-THEMING="# "
-ADD_INSTALL="# "
+THEMING="#"
+ADD_INSTALL="#"
 
 mkdir $INSDIR
 cd $INSDIR
@@ -104,7 +104,7 @@ grub-install /dev/sdw
 grub-mkconfig -o /boot/grub/grub.cfg
 # efibootmgr -d /dev/nvme0n1 -p 1 -c -L "Arch Linux" -l /vmlinuz-linux -u "root=/dev/nvme0n1p2 rw quiet rootflags=subvol=@root initrd=/intel-ucode.img initrd=/initramfs-linux.img"
 # sh -c "sed -i '/\[multilib\]/,/Include/s/^[ ]*#//' /etc/pacman.conf"
-echo "root:$PASSPHRASE" | chpasswd # Пароль для суперпользователя
+# echo "root:$PASSPHRASE" | chpasswd # Пароль для суперпользователя
 
 pacman -S tree mc git \
 noto-fonts ttf-hack termite lightdm-gtk-greeter-settings gtk-engines gtk-engine-murrine \
@@ -122,12 +122,13 @@ git clone https://Igor-slacker@bitbucket.org/Igor-slacker/dotfiles.git
 cp -r dotfiles/defaultConfig/{etc,root,usr} /
 sh dotfiles/defaultConfig/initEtcXdgXfce
 
-$THEMINGsh 03-setupThemes.sh
-$ADD_INSTALLsh 04-additionalInstall.sh
+$THEMING sh 03-setupThemes.sh
+$ADD_INSTALL sh 04-additionalInstall.sh
 
 useradd -m -g users -G wheel $USER_ID -s /bin/zsh $USERNAME # Создание нового пользователя
-echo "$USERNAME:$PASSPHRASE" | chpasswd # Пароль для пользователя
 sh -c "sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers"
+
+echo "$USERNAME:$PASSPHRASE" | chpasswd # Пароль для пользователя
 
 sh -c "sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf"
 echo -e "cursor-theme-name = breeze_cursors\n" >> /etc/lightdm/lightdm-gtk-greeter.conf
@@ -141,6 +142,7 @@ mv /root/$INSDIR /home/$USERNAME/
 chown -hR $USERNAME:users /home/$USERNAME/$INSDIR
 chsh -s /bin/zsh
 echo "install appmenu"
+echo "set password"
 
 EOF
 
@@ -159,8 +161,9 @@ echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xfwm4" version
 echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xsettings" version="1.0">\n  <property name="Net" type="empty">\n    <property name="ThemeName" type="string" value="Mojave-light"/>\n    <property name="IconThemeName" type="string" value="Luna-Light"/>\n  </property>\n</channel>\n' > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 echo -e 'theme-name = Mojave-light\nbackground = #204a87\nicon-theme-name = Luna-Light\nposition = 50%,end 50%,start\n' >> /etc/lightdm/lightdm-gtk-greeter.conf
 
-tar -C /usr/share/icons/ -xvf Luna-Icons.tar.xz Luna Luna-Light
-tar -C /usr/share/themes/ -xvf Mojave-light.tar.xz
+echo "installing themes"
+tar -C /usr/share/icons/ -xf Luna-Icons.tar.xz Luna Luna-Light
+tar -C /usr/share/themes/ -xf Mojave-light.tar.xz
 
 EOF
 
@@ -180,10 +183,11 @@ cat > 04-additionalInstall.sh << EOF
 # cd ..
 # yay -Syu vala-panel-appmenu-xfce-git lightdm-slick-greeter
 
-pacman -U vala-panel-appmenu*
+pacman -U vala-panel-appmenu* --noconfirm
 
 EOF
 
 
 rm ../arch_install
-cp ../* $INSDIR/
+echo "copy packages to $INSDIR"
+# mv ../!($INSDIR) $INSDIR/
