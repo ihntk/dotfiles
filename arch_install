@@ -7,7 +7,7 @@
 #	- розкоментувати форматування, якщо потрібно
 # 	- замінити sdw на потрібний диск
 # 	- замінити користувача і його ID
-# 	- замінити паролі
+# 	- замінити паролі, і якщо потрібно, розкоментувати створення пароля користувача
 # 	- підставити потрібний графічний драйвер
 #	- опції монтування для SSD
 #	- замінити hostname і domain
@@ -28,12 +28,12 @@ USER_ID="" # -u 1000
 PASSPHRASE="af"
 CONSOLE_FONT="ter-v16n" # ter-v18b for leptop
 VDRIVER="vmware" # vmware intel amdgpu ati nouveau xorg-drivers
-SSD="" # discard
+SSD="" # ,discard
 HOST_NAME="archlinux"
 DOMAIN="vbox"
 LOCAL_TIME="--localtime"
 THEMING="#"
-ADD_INSTALL="#"
+ADD_INSTALL="#" # appmenu xfce
 
 mkdir $INSDIR
 cd $INSDIR
@@ -65,11 +65,15 @@ cat > 01-install.sh << EOF
 # EOf
 
 # mkfs.ext4 /dev/sdw2
-mount -o $SSD,noatime /dev/sdw2 /mnt
+mount -o noatime$SSD /dev/sdw2 /mnt
 
 # mkfs.fat -F32 /dev/sdw1
 mkdir -p /mnt/boot/efi
-mount -o $SSD,noatime /dev/sdw1 /mnt/boot/efi
+mount -o noatime$SSD /dev/sdw1 /mnt/boot/efi
+
+# mkfs.ext4 /dev/sdw3
+mkdir -p /mnt/home
+mount -o noatime$SSD /dev/sdw3 /mnt/home
 
 pacstrap -i /mnt base linux-lts linux-firmware grub grub-theme-vimix efibootmgr terminus-font networkmanager sudo neovim zsh
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -106,34 +110,37 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # sh -c "sed -i '/\[multilib\]/,/Include/s/^[ ]*#//' /etc/pacman.conf"
 # echo "root:$PASSPHRASE" | chpasswd # Пароль для суперпользователя
 
-pacman -S tree mc git openssh\
-noto-fonts ttf-hack termite lightdm-gtk-greeter-settings gtk-engines gtk-engine-murrine \
+# remove kde or xfce line
+pacman -S tree mc htop git openssh\
+noto-fonts ttf-hack termite gtk-engines gtk-engine-murrine \
 xorg-server xf86-video-$VDRIVER \
 pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils \
 firefox-i18n-uk \
 libreoffice-fresh-uk \
-konsole dolphin-plugins kate ark okular kinfocenter kompare kfind ktorrent gwenview spectacle kcolorchooser vlc redshift kolourpaint kdeconnect kmix kamoso vlc spotify lokalize filelight kcalc kcharselect kcron kvantum \
-network-manager-applet exo garcon thunar thunar-volman tumbler xfce4-appfinder xfce4-panel xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 thunar-archive-plugin thunar-media-tags-plugin xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver xfce4-screenshooter xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin gvfs catfish file-roller \
-plank p7zip unrar viewnior appmenu-gtk-module \
+plasma-meta konsole dolphin-plugins kate ark okular kinfocenter kompare kfind ktorrent gwenview spectacle kcolorchooser vlc redshift kolourpaint kdeconnect kmix kamoso vlc spotify lokalize filelight kcalc kcharselect kcron kvantum \
+thunar thunar-volman tumbler xfce4-appfinder xfce4-panel xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 network-manager-applet exo garcon thunar-archive-plugin thunar-media-tags-plugin xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver xfce4-screenshooter xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin lightdm-gtk-greeter-settings gvfs viewnior catfish file-roller \
+plank p7zip unrar appmenu-gtk-module \
 --noconfirm --noprogressbar --quiet
 
+# copy dotfiles
 git clone https://Igor-slacker@bitbucket.org/Igor-slacker/dotfiles.git
-cp -r dotfiles/defaultConfig/{etc,root,usr} /
-sh dotfiles/defaultConfig/initEtcXdgXfce
+cp -r dotfiles/defaultConfig/{etc,root} /
+cp -r dotfiles/defaultConfig/usr/share/zsh /usr/share/
+cp -r dotfiles/defaultConfig/usr/share/{icons,xfce4} /usr/share/	# xfce only!!!
+sh dotfiles/defaultConfig/initEtcXdgXfce							# xfce only!!!
 
 $THEMING sh 03-setupThemes.sh
 $ADD_INSTALL sh 04-additionalInstall.sh
 
+# add user
 useradd -m -g users -G wheel $USER_ID -s /bin/zsh $USERNAME # Создание нового пользователя
 sh -c "sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers"
-
 # echo "$USERNAME:$PASSPHRASE" | chpasswd # Пароль для пользователя
 
-sh -c "sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf"
-echo -e "cursor-theme-name = breeze_cursors\n" >> /etc/lightdm/lightdm-gtk-greeter.conf
-
+# remove lightdm or sddm line
 systemctl enable NetworkManager
 systemctl enable lightdm
+systemctl enable sddm
 
 cd /root
 rm $INSDIR/{01-install.sh,02-setupChroot.sh}
@@ -146,6 +153,7 @@ echo "set password"
 EOF
 
 # pacman -S nvidia nvidia-settings nvidia-utils opencl-nvidia opencl-headers lib32-nvidia-utils lib32-opencl-nvidia --noconfirm --noprogressbar --quiet # Установка драйверов Nvidia
+# yay -S nvidia-340xx-lts-dkms
 
 
 ############
@@ -156,13 +164,19 @@ cat > 03-setupThemes.sh << EOF
 
 #!/bin/bash
 
+# xfce default theme
 echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xfwm4" version="1.0">\n  <property name="general" type="empty">\n    <property name="theme" type="string" value="Mojave-light"/>\n  </property>\n</channel>\n' > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml
 echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xsettings" version="1.0">\n  <property name="Net" type="empty">\n    <property name="ThemeName" type="string" value="Mojave-light"/>\n    <property name="IconThemeName" type="string" value="Luna-Light"/>\n  </property>\n</channel>\n' > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
-echo -e 'theme-name = Mojave-light\nbackground = #204a87\nicon-theme-name = Luna-Light\nposition = 50%,end 50%,start\n' >> /etc/lightdm/lightdm-gtk-greeter.conf
 
-echo "installing themes"
+echo "installing gtk themes and icons"
 tar -C /usr/share/icons/ -xf Luna-Icons.tar.xz Luna Luna-Light
 tar -C /usr/share/themes/ -xf Mojave-light.tar.xz
+tar -C /usr/share/themes/ -xf XFCE_Colour_Lite.tar.gz XFCE_Colour_Lite
+
+# lightdm theme
+sh -c "sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf"
+echo -e "cursor-theme-name = breeze_cursors\n" >> /etc/lightdm/lightdm-gtk-greeter.conf
+echo -e 'theme-name = Mojave-light\nbackground = #204a87\nicon-theme-name = Luna-Light\nposition = 50%,end 50%,start\n' >> /etc/lightdm/lightdm-gtk-greeter.conf
 
 EOF
 
