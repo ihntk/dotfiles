@@ -106,16 +106,15 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # sh -c "sed -i '/\[multilib\]/,/Include/s/^[ ]*#//' /etc/pacman.conf"
 # echo "root:$PASSPHRASE" | chpasswd # Пароль для суперпользователя
 
-pacman -S tree mc git \
+pacman -S tree mc git openssh\
 noto-fonts ttf-hack termite lightdm-gtk-greeter-settings gtk-engines gtk-engine-murrine \
 xorg-server xf86-video-$VDRIVER \
 pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils \
 firefox-i18n-uk \
-network-manager-applet exo garcon thunar thunar-volman tumbler xfce4-appfinder xfce4-panel \
-xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 thunar-archive-plugin \
-thunar-media-tags-plugin xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver \
-xfce4-screenshooter xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin gvfs plank \
-catfish file-roller p7zip unrar viewnior appmenu-gtk-module \
+libreoffice-fresh-uk \
+konsole dolphin-plugins kate ark okular kinfocenter kompare kfind ktorrent gwenview spectacle kcolorchooser vlc redshift kolourpaint kdeconnect kmix kamoso vlc spotify lokalize filelight kcalc kcharselect kcron kvantum \
+network-manager-applet exo garcon thunar thunar-volman tumbler xfce4-appfinder xfce4-panel xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 thunar-archive-plugin thunar-media-tags-plugin xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver xfce4-screenshooter xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin gvfs catfish file-roller \
+plank p7zip unrar viewnior appmenu-gtk-module \
 --noconfirm --noprogressbar --quiet
 
 git clone https://Igor-slacker@bitbucket.org/Igor-slacker/dotfiles.git
@@ -128,7 +127,7 @@ $ADD_INSTALL sh 04-additionalInstall.sh
 useradd -m -g users -G wheel $USER_ID -s /bin/zsh $USERNAME # Создание нового пользователя
 sh -c "sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers"
 
-echo "$USERNAME:$PASSPHRASE" | chpasswd # Пароль для пользователя
+# echo "$USERNAME:$PASSPHRASE" | chpasswd # Пароль для пользователя
 
 sh -c "sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf"
 echo -e "cursor-theme-name = breeze_cursors\n" >> /etc/lightdm/lightdm-gtk-greeter.conf
