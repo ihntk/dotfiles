@@ -138,6 +138,7 @@ $THEMING sh 03-setupThemes.sh
 $ADD_INSTALL sh 04-additionalInstall.sh
 
 # add user
+# groupadd -g 0000 group
 useradd -m -g users -G wheel $USER_ID -s /bin/zsh $USERNAME # Создание нового пользователя
 sh -c "sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers"
 # echo "$USERNAME:$PASSPHRASE" | chpasswd # Пароль для пользователя
