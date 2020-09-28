@@ -46,6 +46,8 @@ cd $INSDIR
 cat > 01-install.sh << EOF
 #!/bin/sh
 
+set -e
+
 	# Wipe the MBR:
   	# dd if=/dev/zero of=/dev/sdw bs=512 count=1
 
@@ -93,6 +95,8 @@ EOF
 cat > 02-setupChroot.sh << EOF
 #!/usr/bin/env bash
 
+set -e
+
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && echo "uk_UA.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
 echo "LANG=uk_UA.UTF-8" > /etc/locale.conf
@@ -111,13 +115,13 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # echo "root:$PASSPHRASE" | chpasswd # Пароль для суперпользователя
 
 # remove kde or xfce line
-pacman -S tree mc htop git openssh\
+pacman -S tree mc htop git openssh \
 noto-fonts ttf-hack termite gtk-engines gtk-engine-murrine \
 xorg-server xf86-video-$VDRIVER \
 pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils \
 firefox-i18n-uk \
 libreoffice-fresh-uk \
-plasma-meta konsole dolphin-plugins kate ark okular kinfocenter kompare kfind ktorrent gwenview spectacle kcolorchooser vlc redshift kolourpaint kdeconnect kmix kamoso vlc spotify lokalize filelight kcalc kcharselect kcron kvantum \
+plasma-meta konsole dolphin-plugins kate ark okular kinfocenter kompare kfind ktorrent gwenview spectacle kcolorchooser vlc redshift kolourpaint kdeconnect kmix kamoso vlc lokalize filelight kcalc kcharselect kcron kvantum-qt5 \
 thunar thunar-volman tumbler xfce4-appfinder xfce4-panel xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 network-manager-applet exo garcon thunar-archive-plugin thunar-media-tags-plugin xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver xfce4-screenshooter xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin lightdm-gtk-greeter-settings gvfs viewnior catfish file-roller \
 plank p7zip unrar appmenu-gtk-module \
 --noconfirm --noprogressbar --quiet
@@ -138,18 +142,20 @@ useradd -m -g users -G wheel $USER_ID -s /bin/zsh $USERNAME # Создание �
 sh -c "sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers"
 # echo "$USERNAME:$PASSPHRASE" | chpasswd # Пароль для пользователя
 
+echo "set password"
+passwd $USERNAME
+
 # remove lightdm or sddm line
 systemctl enable NetworkManager
 systemctl enable lightdm
 systemctl enable sddm
 
 cd /root
-rm $INSDIR/{01-install.sh,02-setupChroot.sh}
+# rm $INSDIR/{01-install.sh,02-setupChroot.sh}
 mv /root/$INSDIR /home/$USERNAME/
 chown -hR $USERNAME:users /home/$USERNAME/$INSDIR
 chsh -s /bin/zsh
 echo "install appmenu"
-echo "set password"
 
 EOF
 
@@ -162,8 +168,9 @@ EOF
 ###
 
 cat > 03-setupThemes.sh << EOF
-
 #!/bin/bash
+
+set -e
 
 # xfce default theme
 echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xfwm4" version="1.0">\n  <property name="general" type="empty">\n    <property name="theme" type="string" value="Mojave-light"/>\n  </property>\n</channel>\n' > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml
@@ -187,8 +194,9 @@ EOF
 ###
 
 cat > 04-additionalInstall.sh << EOF
-
 #!/bin/bash
+
+set -e
 
 # pacman -S --needed base-devel --noconfirm --noprogressbar --quiet
 # git clone https://aur.archlinux.org/yay.git
