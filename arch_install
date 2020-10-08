@@ -128,11 +128,12 @@ plank p7zip unrar appmenu-gtk-module \
 
 # copy dotfiles
 git clone https://Igor-slacker@bitbucket.org/Igor-slacker/dotfiles.git
-cp -r dotfiles/defaultConfig/{etc,root} /
-cp -r dotfiles/defaultConfig/usr/share/zsh /usr/share/
-cp -r dotfiles/kdeConfig/etc /									# kde only!!!
-cp -r dotfiles/defaultConfig/usr/share/{icons,xfce4} /usr/share/	# xfce only!!!
-sh dotfiles/defaultConfig/initEtcXdgXfce							# xfce only!!!
+cp -r dotfiles/defaultConfig/* /				# */
+
+cp -r dotfiles/kdeConfig/* /					# kde only!!! */
+
+cp -r dotfiles/xfceConfig/usr/* /				# xfce only!!! */
+sh dotfiles/xfceConfig/initEtcXdgXfce			# xfce only!!!
 
 $THEMING sh 03-setupThemes.sh
 $ADD_INSTALL sh 04-additionalInstall.sh
