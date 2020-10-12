@@ -1,0 +1,7 @@
+[Unit]
+  Description=Set up pCloud console client
+[Service]
+  Type=simple
+  ExecStart=/usr/bin/pcloudcc -u write_Your_UserName_here -m /home/igor/Public/pCloudDrive
+[Install]
+ WantedBy=default.target

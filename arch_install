@@ -206,10 +206,12 @@ set -e
 # makepkg -si
 # cd ..
 # yay -Syu vala-panel-appmenu-xfce-git lightdm-slick-greeter
+# yay -S pcloudcc
 
 pacman -U vala-panel-appmenu* --noconfirm
 
 systemctl --user enable --now redshift
+systemctl --user enable --now pcloud
 
 EOF
 
