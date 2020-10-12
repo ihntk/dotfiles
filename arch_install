@@ -116,7 +116,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 # remove kde or xfce line
 pacman -S tree mc htop git openssh \
-noto-fonts ttf-hack termite gtk-engines gtk-engine-murrine \
+noto-fonts ttf-hack termite redshift gtk-engines gtk-engine-murrine \
 xorg-server xf86-video-$VDRIVER \
 pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils \
 firefox-i18n-uk \
@@ -208,6 +208,8 @@ set -e
 # yay -Syu vala-panel-appmenu-xfce-git lightdm-slick-greeter
 
 pacman -U vala-panel-appmenu* --noconfirm
+
+systemctl --user enable --now redshift
 
 EOF
 
