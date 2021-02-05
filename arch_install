@@ -116,7 +116,8 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 # remove kde or xfce line
 pacman -S tree mc htop git openssh \
-noto-fonts ttf-hack termite redshift gtk-engines gtk-engine-murrine \
+noto-fonts \
+ttf-liberation ttf-hack termite redshift gtk-engines gtk-engine-murrine \
 xorg-server xf86-video-$VDRIVER \
 pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils \
 firefox-i18n-uk \
@@ -132,7 +133,7 @@ cp -r dotfiles/defaultConfig/* /				# */
 
 cp -r dotfiles/kdeConfig/* /					# kde only!!! */
 
-cp -r dotfiles/xfceConfig/usr/* /				# xfce only!!! */
+cp -r dotfiles/xfceConfig/{etc,usr} /				# xfce only!!!
 sh dotfiles/xfceConfig/initEtcXdgXfce			# xfce only!!!
 
 $THEMING sh 03-setupThemes.sh
@@ -179,7 +180,7 @@ echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xfwm4" version
 echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xsettings" version="1.0">\n  <property name="Net" type="empty">\n    <property name="ThemeName" type="string" value="Mojave-light"/>\n    <property name="IconThemeName" type="string" value="Luna-Light"/>\n  </property>\n</channel>\n' > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 
 echo "installing gtk themes and icons"
-tar -C /usr/share/icons/ -xf Luna-Icons.tar.xz Luna Luna-Light
+tar -C /usr/share/icons/ -xf Luna\ Icons.tar.xz Luna Luna-Light
 tar -C /usr/share/themes/ -xf Mojave-light.tar.xz
 tar -C /usr/share/themes/ -xf XFCE_Colour_Lite.tar.gz XFCE_Colour_Lite
 
@@ -207,11 +208,13 @@ set -e
 # cd ..
 # yay -Syu vala-panel-appmenu-xfce-git lightdm-slick-greeter
 # yay -S pcloudcc
+# yay -S xcursor-breeze
 
 pacman -U vala-panel-appmenu* --noconfirm
+pacman -U xcursor-breeze*
 
 systemctl --user enable --now redshift
-systemctl --user enable --now pcloud
+# systemctl --user enable --now pcloud
 
 EOF
 
