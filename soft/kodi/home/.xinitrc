@@ -1,6 +1,8 @@
 #!/bin/sh
 # $XConsortium: xinitrc.cpp,v 1.4 91/08/22 11:41:34 rws Exp $
 
+# This only need for Slackware standalone mode
+
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources

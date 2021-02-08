@@ -1,0 +1,8 @@
+<keymap>
+	<global>
+		<keyboard>
+			<key id="61515">AudioNextLanguage</key>
+		</keyboard>
+	</global>
+</keymap>
+<!-- key k toggles audio -->
