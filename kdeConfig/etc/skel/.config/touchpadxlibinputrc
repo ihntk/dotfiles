@@ -1,0 +1,4 @@
+[SynPS/2 Synaptics TouchPad]
+lmrTapButtonMap=true
+lrmTapButtonMap=false
+tapToClick=true
