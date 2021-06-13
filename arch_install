@@ -124,7 +124,7 @@ xorg-server xf86-video-$VDRIVER \
 pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils \
 jack2 firefox-i18n-uk \
 libreoffice-fresh-uk \
-plasma-meta konsole dolphin-plugins ark okular kinfocenter kompare kfind ktorrent gwenview spectacle kcolorchooser vlc kolourpaint kdeconnect kmix kamoso lokalize filelight kcalc kcharselect kcron kvantum-qt5 \
+plasma-meta konsole dolphin-plugins ark okular kinfocenter kompare kfind ktorrent gwenview spectacle kcolorchooser vlc kolourpaint kdeconnect kmix kamoso lokalize filelight kcalc kcharselect kcron kvantum-qt5 plasma5-applets-window-buttons \
 thunar thunar-volman tumbler xfce4-appfinder xfce4-panel xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 network-manager-applet exo garcon thunar-archive-plugin thunar-media-tags-plugin xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver xfce4-screenshooter xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin lightdm-gtk-greeter-settings gvfs viewnior catfish file-roller \
 plank p7zip unrar appmenu-gtk-module \
 --noconfirm --noprogressbar --quiet

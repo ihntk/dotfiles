@@ -44,6 +44,16 @@ plugin=org.kde.plasma.systemtray
 immutability=1
 plugin=org.kde.plasma.digitalclock
 
+[Containments][2][Applets][9]
+immutability=1
+plugin=org.kde.windowbuttons
+
+[Containments][2][Applets][9][Configuration][General]
+buttons=5|3|4|10|2|9
+containmentType=Plasma
+disabledMaximizedBorders=NoBorders
+visibility=ActiveMaximizedWindow
+
 [Containments][2][General]
-AppletOrder=3;5;23;4;6;8;20
+AppletOrder=3;9;5;23;4;6;8;20
 
