@@ -1,1 +1,17 @@
-pcloudcc -u userName -p -s
+установка
+  yay -S pcloudcc
+для підключення клієнта до облікового запису
+	pcloudcc -u userName -p -s
+
+systemd unit
+$cat .config/systemd/user/pcloud.service
+[Unit]
+  Description=Set up pCloud console client
+[Service]
+  Type=simple
+  ExecStart=/usr/bin/pcloudcc -u userName -m /path/to/mount/pCloudDrive
+[Install]
+ WantedBy=default.target
+
+
+ 
