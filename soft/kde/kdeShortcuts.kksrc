@@ -1,3 +1,7 @@
+[khotkeys][Global Shortcuts]
+{45e8fdff-acf6-4353-a285-be362d8da5fb}=Meta+Return; Ctrl+Alt+T
+{d03619b6-9b3c-48cc-9d9c-a2aadb485550}=
+
 [kwin][Global Shortcuts]
 Activate Window Demanding Attention=Ctrl+Alt+A
 Decrease Opacity=
@@ -58,6 +62,7 @@ Switch to Screen 4=
 Switch to Screen 5=
 Switch to Screen 6=
 Switch to Screen 7=
+Toggle Night Color=
 Toggle Window Raise/Lower=
 Walk Through Desktop List=
 Walk Through Desktop List (Reverse)=
@@ -142,4 +147,32 @@ Window to Screen 7=
 view_actual_size=
 view_zoom_in=Meta+=
 view_zoom_out=Meta+-
-Перемкнути нічні кольори=
+
+[plasmashell][Global Shortcuts]
+activate task manager entry 1=
+activate task manager entry 10=
+activate task manager entry 2=
+activate task manager entry 3=
+activate task manager entry 4=
+activate task manager entry 5=
+activate task manager entry 6=
+activate task manager entry 7=
+activate task manager entry 8=
+activate task manager entry 9=
+activate widget 3=Alt+F1
+clear-history=
+clipboard_action=Ctrl+Alt+X
+cycleNextAction=
+cyclePrevAction=
+edit_clipboard=
+manage activities=Meta+Q
+next activity=
+previous activity=
+repeat_action=Ctrl+Alt+R
+show dashboard=Ctrl+F12
+show-barcode=
+show-on-mouse-pos=Meta+V
+stop current activity=Meta+S
+switch to next activity=
+switch to previous activity=
+toggle do not disturb=
