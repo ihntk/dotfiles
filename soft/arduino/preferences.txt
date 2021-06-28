@@ -1,0 +1,1 @@
+sketchbook.path=/home/igor/documents/ArduinoProjects
