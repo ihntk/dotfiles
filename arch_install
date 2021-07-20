@@ -24,15 +24,24 @@
 
 INSDIR="archInstaller"
 USERNAME="ih"
-USER_ID="" # -u 1000
+USER_ID="" # "-u 1000"
 PASSPHRASE="af"
-CONSOLE_FONT="ter-v16n" # ter-v18b for leptop or cyr-sun16
-VDRIVER="vmware" # vmware intel amdgpu ati nouveau xorg-drivers
-SSD="" # ,discard
+
+AD_GROUP="" # additional group
+GROUP_ID="" # uncomment groupadd before useradd
+GROUPS="wheel,$AD_GROUP" # "gp1,gp2" => uncomment groupadd before useradd
+
+CONSOLE_FONT="cyr-sun16" # "ter-v18b" for leptop or "ter-v16n" => Add terminus-font to pacstrap
+VDRIVER="vmware" # "vmware" "intel" "amdgpu" "ati" "nouveau" "xorg-drivers"
+SSD="" # ",discard"
+
 HOST_NAME="archlinux"
 DOMAIN="vbox"
-LOCAL_TIME="--localtime"
-THEMING="#"
+LOCAL_TIME="--localtime" # "--utc"
+
+PARTITION="#" 	# ""
+FORMAT="#" 		# ""
+THEMING="#"		# ""
 ADD_INSTALL="#" # appmenu xfce
 
 mkdir $INSDIR
@@ -47,37 +56,20 @@ cat > 01-install.sh << EOF
 #!/bin/sh
 
 set -e
+$PARTITION sh 05-partition.sh
 
-	# Wipe the MBR:
-  	# dd if=/dev/zero of=/dev/sdw bs=512 count=1
-
-	# /sbin/fdisk /dev/sdw << EOf
-	# g
-	# n
-	# 1
-
-	# +20M
-	# t
-	# 1
-	# n
-	# 2
-
-
-	# w
-# EOf
-
-# mkfs.ext4 /dev/sdw2
+$FORMAT mkfs.ext4 /dev/sdw2
 mount -o noatime$SSD /dev/sdw2 /mnt
 
-# mkfs.fat -F32 /dev/sdw1
+$FORMAT mkfs.fat -F32 /dev/sdw1
 mkdir -p /mnt/boot/efi
 mount -o noatime$SSD /dev/sdw1 /mnt/boot/efi
 
-# mkfs.ext4 /dev/sdw3
+$FORMAT mkfs.ext4 /dev/sdw3
 mkdir -p /mnt/home
 mount -o noatime$SSD /dev/sdw3 /mnt/home
 
-pacstrap -i /mnt base linux-lts linux-firmware grub grub-theme-vimix efibootmgr terminus-font networkmanager sudo neovim zsh
+pacstrap -i /mnt base linux-lts linux-firmware grub grub-theme-vimix efibootmgr networkmanager sudo neovim zsh
 genfstab -U /mnt >> /mnt/etc/fstab
 
 mv ../$INSDIR /mnt/root/
@@ -97,25 +89,34 @@ cat > 02-setupChroot.sh << EOF
 
 set -e
 
+# ------- Language
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && echo "uk_UA.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
 echo "LANG=uk_UA.UTF-8" > /etc/locale.conf
 echo "FONT=$CONSOLE_FONT" > /etc/vconsole.conf
-# echo -e "MODULES=(btrfs nvme nvidia)\nHOOKS=(autodetect systemd)\nCOMPRESSION=\"cat\"" > /etc/mkinitcpio.conf
-# mkinitcpio -p linux-lts # Создание образа ранней загрузки
-echo "$HOST_NAME" > /etc/hostname # Задаём имя компьютера
+
+# ------- Time
+ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
+hwclock --systohc $LOCAL_TIME
+
+# ------- Host
+echo "$HOST_NAME" > /etc/hostname
 echo -e "127.0.0.1	localhost\n::1		localhost\n127.0.1.1	$HOST_NAME.$DOMAIN	$HOST_NAME" > /etc/hosts
+
+# ------- Grub
 sh -c "sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub"
 echo "GRUB_THEME=/usr/share/grub/themes/Vimix/theme.txt" >> /etc/default/grub
-ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
-hwclock --systohc $LOCAL_TIME # hwclock --systohc --utc (для установки одной системы)
 grub-install /dev/sdw
 grub-mkconfig -o /boot/grub/grub.cfg
-sh -c "sed -i 's/#Color/Color/' /etc/pacman.conf"
+# echo -e "MODULES=(btrfs nvme nvidia)\nHOOKS=(autodetect systemd)\nCOMPRESSION=\"cat\"" > /etc/mkinitcpio.conf
+# mkinitcpio -p linux-lts # Создание образа ранней загрузки
 # efibootmgr -d /dev/nvme0n1 -p 1 -c -L "Arch Linux" -l /vmlinuz-linux -u "root=/dev/nvme0n1p2 rw quiet rootflags=subvol=@root initrd=/intel-ucode.img initrd=/initramfs-linux.img"
-# sh -c "sed -i '/\[multilib\]/,/Include/s/^[ ]*#//' /etc/pacman.conf"
-# echo "root:$PASSPHRASE" | chpasswd # Пароль для суперпользователя
 
+# ------- Pacman
+sh -c "sed -i 's/#Color/Color/' /etc/pacman.conf"
+# sh -c "sed -i '/\[multilib\]/,/Include/s/^[ ]*#//' /etc/pacman.conf"
+
+# ------- Installation
 # remove kde or xfce line
 pacman -S tree mc htop git openssh \
 noto-fonts \
@@ -129,7 +130,7 @@ thunar thunar-volman tumbler xfce4-appfinder xfce4-panel xfce4-power-manager xfc
 plank p7zip unrar appmenu-gtk-module \
 --noconfirm --noprogressbar --quiet
 
-# copy dotfiles
+# ------- Copy dotfiles
 git clone https://Igor-slacker@bitbucket.org/Igor-slacker/dotfiles.git
 cp -r dotfiles/defaultConfig/* /				# */
 
@@ -141,26 +142,30 @@ sh dotfiles/xfceConfig/initEtcXdgXfce			# xfce only!!!
 $THEMING sh 03-setupThemes.sh
 $ADD_INSTALL sh 04-additionalInstall.sh
 
-# add user
-# groupadd -g 0000 group
-useradd -m -g users -G wheel $USER_ID -s /bin/zsh $USERNAME # Создание нового пользователя
+# ------- add user
+# groupadd -g $GROUP_ID $AD_GROUP
+useradd -m -g users -G $GROUPS $USER_ID -s /bin/zsh $USERNAME # Создание нового пользователя
 sh -c "sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers"
+
+# ------- Password
 # echo "$USERNAME:$PASSPHRASE" | chpasswd # Пароль для пользователя
 
 echo "set password"
 passwd $USERNAME
 
+# ------- Autostart
 # remove lightdm or sddm line
 systemctl enable NetworkManager
 systemctl enable lightdm
 systemctl enable sddm
 
+# ------- Clean after installation
 cd /root
 # rm $INSDIR/{01-install.sh,02-setupChroot.sh}
 mv /root/$INSDIR /home/$USERNAME/
 chown -hR $USERNAME:users /home/$USERNAME/$INSDIR
 chsh -s /bin/zsh
-echo "install appmenu"
+echo "  -- installation is finished --  "
 
 EOF
 
@@ -217,6 +222,31 @@ pacman -U xcursor-breeze*
 
 systemctl --user enable --now redshift
 # systemctl --user enable --now pcloud
+
+EOF
+
+cat > 05-partition.sh << EOF
+#!/bin/bash
+
+set -e
+	# Wipe the MBR:
+  	dd if=/dev/zero of=/dev/sdw bs=512 count=1
+
+  	# 20M efi + 1 partition
+	/sbin/fdisk /dev/sdw << EOf
+	g
+	n
+	1
+
+	+20M
+	t
+	1
+	n
+	2
+
+
+	w
+EOf
 
 EOF
 
