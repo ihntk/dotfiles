@@ -29,7 +29,7 @@ PASSPHRASE="af"
 
 AD_GROUP="" # additional group
 GROUP_ID="" # uncomment groupadd before useradd
-GROUPS="wheel,$AD_GROUP" # "gp1,gp2" => uncomment groupadd before useradd
+GROUPSS="wheel" # "wheel,$AD_GROUP" "gp1,gp2" => uncomment groupadd before useradd
 
 CONSOLE_FONT="cyr-sun16" # "ter-v18b" for leptop or "ter-v16n" => Add terminus-font to pacstrap
 VDRIVER="vmware" # "vmware" "intel" "amdgpu" "ati" "nouveau" "xorg-drivers"
@@ -118,6 +118,7 @@ sh -c "sed -i 's/#Color/Color/' /etc/pacman.conf"
 
 # ------- Installation
 # remove kde or xfce line
+# use ristretto insteasd of viewnior because the last is gtk2 only!!!
 pacman -S tree mc htop git openssh \
 noto-fonts \
 ttf-liberation ttf-hack alacritty redshift gtk-engines gtk-engine-murrine \
@@ -126,7 +127,9 @@ pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils \
 jack2 firefox-i18n-uk \
 libreoffice-fresh-uk \
 plasma-meta konsole dolphin-plugins ark okular kinfocenter kompare kfind ktorrent gwenview spectacle kcolorchooser vlc kolourpaint kdeconnect kmix kamoso lokalize filelight kcalc kcharselect kcron kvantum-qt5 plasma5-applets-window-buttons \
-thunar thunar-volman tumbler xfce4-appfinder xfce4-panel xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 network-manager-applet exo garcon thunar-archive-plugin thunar-media-tags-plugin xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver xfce4-screenshooter xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin lightdm-gtk-greeter-settings gvfs viewnior catfish file-roller \
+xfce4-appfinder xfce4-panel xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver xfce4-screenshooter exo garcon xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin \
+thunar thunar-volman tumbler thunar-archive-plugin thunar-media-tags-plugin \
+network-manager-applet lightdm-gtk-greeter-settings gvfs ristretto catfish file-roller \
 plank p7zip unrar appmenu-gtk-module \
 --noconfirm --quiet
 
@@ -144,7 +147,7 @@ $ADD_INSTALL sh 04-additionalInstall.sh
 
 # ------- add user
 # groupadd -g $GROUP_ID $AD_GROUP
-useradd -m -g users -G $GROUPS $USER_ID -s /bin/zsh $USERNAME # Создание нового пользователя
+useradd -m -g users -G $GROUPSS $USER_ID -s /bin/zsh $USERNAME # Создание нового пользователя
 sh -c "sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers"
 
 # ------- Password
@@ -185,6 +188,7 @@ set -e
 # xfce default theme
 echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xfwm4" version="1.0">\n  <property name="general" type="empty">\n    <property name="theme" type="string" value="Mojave-light"/>\n  </property>\n</channel>\n' > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml
 echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xsettings" version="1.0">\n  <property name="Net" type="empty">\n    <property name="ThemeName" type="string" value="Mojave-light"/>\n    <property name="IconThemeName" type="string" value="Luna-Light"/>\n  </property>\n</channel>\n' > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
+sh -c "sed -i 's/name="CursorThemeSize" type="int" value="0"/name="CursorThemeSize" type="int" value="breeze_cursors"/g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
 
 echo "installing gtk themes and icons"
 tar -C /usr/share/icons/ -xf Luna-Icons.tar.xz Luna Luna-Light
@@ -218,7 +222,7 @@ set -e
 # yay -S xcursor-breeze
 
 pacman -U vala-panel-appmenu* --noconfirm
-pacman -U xcursor-breeze*
+pacman -U breeze-cursor*
 
 systemctl --user enable --now redshift
 # systemctl --user enable --now pcloud
