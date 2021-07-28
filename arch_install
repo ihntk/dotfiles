@@ -119,9 +119,9 @@ sh -c "sed -i 's/#Color/Color/' /etc/pacman.conf"
 # ------- Installation
 # remove kde or xfce line
 # use ristretto insteasd of viewnior because the last is gtk2 only!!!
-pacman -S tree mc htop git openssh \
+pacman -S tree mc htop git openssh grml-zsh-config \
 noto-fonts \
-ttf-liberation ttf-hack alacritty redshift gtk-engines gtk-engine-murrine \
+ttf-liberation ttf-hack alacritty redshift \
 xorg-server xf86-video-$VDRIVER \
 pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils \
 jack2 firefox-i18n-uk \
