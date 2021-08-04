@@ -69,7 +69,7 @@ $FORMAT mkfs.ext4 /dev/sdw3
 mkdir -p /mnt/home
 mount -o noatime$SSD /dev/sdw3 /mnt/home
 
-pacstrap -i /mnt base linux-lts linux-firmware grub grub-theme-vimix efibootmgr networkmanager sudo neovim zsh
+pacstrap -i /mnt base mkinitcpio linux-lts linux-firmware grub grub-theme-vimix efibootmgr micro grml-zsh-config
 genfstab -U /mnt >> /mnt/etc/fstab
 
 mv ../$INSDIR /mnt/root/
@@ -117,15 +117,14 @@ sh -c "sed -i 's/#Color/Color/' /etc/pacman.conf"
 # sh -c "sed -i '/\[multilib\]/,/Include/s/^[ ]*#//' /etc/pacman.conf"
 
 # ------- Installation
-# remove kde or xfce line
-# use ristretto insteasd of viewnior because the last is gtk2 only!!!
-pacman -S tree mc htop git openssh grml-zsh-config \
-noto-fonts \
+# - remove kde or xfce line
+# - pcmanfm-gtk3 neovim libreoffice-fresh-uk \
+# - use ristretto insteasd of viewnior because the last one is gtk2 only!!!
+pacman -S tree mc htop git openssh networkmanager sudo \
 ttf-liberation ttf-hack alacritty redshift \
 xorg-server xf86-video-$VDRIVER \
 pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils \
 jack2 firefox-i18n-uk \
-libreoffice-fresh-uk \
 plasma-meta konsole dolphin-plugins ark okular kinfocenter kompare kfind ktorrent gwenview spectacle kcolorchooser vlc kolourpaint kdeconnect kmix kamoso lokalize filelight kcalc kcharselect kcron kvantum-qt5 plasma5-applets-window-buttons \
 xfce4-appfinder xfce4-panel xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver xfce4-screenshooter exo garcon xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin \
 thunar thunar-volman tumbler thunar-archive-plugin thunar-media-tags-plugin \
@@ -188,12 +187,15 @@ set -e
 # xfce default theme
 echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xfwm4" version="1.0">\n  <property name="general" type="empty">\n    <property name="theme" type="string" value="Mojave-light"/>\n  </property>\n</channel>\n' > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml
 echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xsettings" version="1.0">\n  <property name="Net" type="empty">\n    <property name="ThemeName" type="string" value="Mojave-light"/>\n    <property name="IconThemeName" type="string" value="Luna-Light"/>\n  </property>\n</channel>\n' > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
-sh -c "sed -i 's/name="CursorThemeSize" type="int" value="0"/name="CursorThemeSize" type="int" value="breeze_cursors"/g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
+sh -c "sed -i 's/name="CursorThemeName" type="string" value=""/name="CursorThemeName" type="string" value="breeze_cursors"/g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
 
 echo "installing gtk themes and icons"
 tar -C /usr/share/icons/ -xf Luna-Icons.tar.xz Luna Luna-Light
 tar -C /usr/share/themes/ -xf Mojave-light.tar.xz
 tar -C /usr/share/themes/ -xf XFCE_Colour_Lite.tar.gz XFCE_Colour_Lite
+
+# gtk3 theme
+echo -e "gtk-cursor-theme-name=breeze_cursors\ngtk-modules=colorreload-gtk-module:window-decorations-gtk-module\ngtk-theme-name=Mojave-light\n" >> /etc/skel/.config/gtk-3.0/settings.ini
 
 # lightdm theme
 sh -c "sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf"
