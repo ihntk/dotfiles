@@ -69,7 +69,7 @@ $FORMAT mkfs.ext4 /dev/sdw3
 mkdir -p /mnt/home
 mount -o noatime$SSD /dev/sdw3 /mnt/home
 
-pacstrap -i /mnt base mkinitcpio linux-lts linux-firmware grub grub-theme-vimix efibootmgr micro grml-zsh-config
+pacstrap -i /mnt base mkinitcpio linux-lts linux-firmware grub grub-theme-vimix efibootmgr neovim grml-zsh-config
 genfstab -U /mnt >> /mnt/etc/fstab
 
 mv ../$INSDIR /mnt/root/
