@@ -1,0 +1,13 @@
+[org/xfce/mousepad/preferences/file]
+add-last-end-of-line=true
+
+[org/xfce/mousepad/preferences/view]
+color-scheme='tango'
+font-name='Hack 11'
+show-line-numbers=true
+tab-width=uint32 4
+use-default-monospace-font=false
+
+[org/xfce/mousepad/preferences/window]
+statusbar-visible=true
+toolbar-visible=true

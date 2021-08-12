@@ -1,0 +1,3 @@
+[net/launchpad/plank/docks/dock1]
+dock-items=['chromium.dockitem', 'thunar.dockitem', 'Alacritty.dockitem', 'mousepad.dockitem']
+
