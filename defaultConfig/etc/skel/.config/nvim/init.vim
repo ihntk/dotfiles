@@ -18,19 +18,7 @@ cmap w!! w !sudo tee > /dev/null %
 map J :bp<CR>
 map K :bn<CR>
 
-"vin-plug
-"curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-call plug#begin('~/.local/share/nvim/plugged')
-
-Plug 'morhetz/gruvbox'
-Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
-"Plug 'artur-shaik/vim-javacomplete2'
-
-call plug#end()
-
-colorscheme gruvbox 
+colorscheme gruvbox-material
 "colorscheme desert 
 
 "airline
