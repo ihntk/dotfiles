@@ -231,10 +231,12 @@ set -e
 # yay -S pcloudcc
 # yay -S xcursor-breeze
 
-pacman -U vala-panel-appmenu* --noconfirm
-pacman -U breeze-cursor*
+pacman -U vala-panel-appmenu* \
+breeze-cursor* \
+neovim-fugitive neovim-airline neovim-airline-gruvbox-material-git neovim-gruvbox-material-git
+--noconfirm
 
-systemctl --user enable --now redshift
+# systemctl --user enable --now redshift
 # systemctl --user enable --now pcloud
 
 EOF
