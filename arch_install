@@ -48,13 +48,6 @@ mkdir $INSDIR
 cd $INSDIR
 
 
-########################################################################
-##                                                                    ##
-##                                                                    ##
-##	!!!!!!!!!!! update system clock (autoupdate) !!!!!!!!!!!!!!!!     ##
-##                                                                    ##
-##                                                                    ##
-########################################################################
 
 ############
 # Install script
@@ -64,6 +57,9 @@ cat > 01-install.sh << EOF
 #!/bin/sh
 
 set -e
+
+timedatectl set-ntp true
+
 $PARTITION sh 05-partition.sh
 
 $FORMAT mkfs.ext4 /dev/sdw2
