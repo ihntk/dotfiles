@@ -129,6 +129,7 @@ ttf-liberation ttf-hack alacritty redshift \
 xorg-server xf86-video-$VDRIVER \
 pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils \
 jack2 firefox-i18n-uk \
+bspwm sxhkd rofi dunst libnotify picom xwallpaper awesome-terminal-fonts xfce4-power-manager polkit-gnome \
 plasma-meta konsole dolphin-plugins ark okular kinfocenter kompare kfind ktorrent gwenview spectacle kcolorchooser vlc kolourpaint kdeconnect kmix kamoso lokalize filelight kcalc kcharselect kcron kvantum-qt5 plasma5-applets-window-buttons \
 xfce4-appfinder xfce4-panel xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver xfce4-screenshooter exo garcon xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin \
 thunar thunar-volman tumbler thunar-archive-plugin thunar-media-tags-plugin \
@@ -144,6 +145,8 @@ cp -r dotfiles/kdeConfig/* /					# kde only!!! */
 
 cp -r dotfiles/xfceConfig/{etc,usr} /				# xfce only!!!
 sh dotfiles/xfceConfig/initEtcXdgXfce			# xfce only!!!
+
+rm /etc/skel/*/.gitkeep
 
 $THEMING sh 03-setupThemes.sh
 $ADD_INSTALL sh 04-additionalInstall.sh
@@ -227,8 +230,9 @@ set -e
 # yay -S xcursor-breeze
 
 pacman -U vala-panel-appmenu* \
-breeze-cursor* \
-neovim-fugitive neovim-airline neovim-airline-gruvbox-material-git neovim-gruvbox-material-git
+breeze-cursor xiccd \
+neovim-fugitive neovim-airline neovim-airline-gruvbox-material-git neovim-gruvbox-material-git \
+polybar xiccd \
 --noconfirm
 
 # systemctl --user enable --now redshift
