@@ -2,10 +2,12 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
-/usr/lib/polkit-kde-authentication-agent-1 &
-/usr/lib/org_kde_powerdevil &
-xiccd &
-xwallpaper --maximize /usr/share/backgrounds/KDE Plasma Dark 285 HD WL &
+usr/bin/lxqt-policykit-agent &
+usr/bin/lxqt-powermanagement &
+usr/bin/lxqt-notificationd &
+nm-tray &
+# xiccd &
+xwallpaper --zoom /usr/share/backgrounds/KDE\ Plasma\ Dark\ 285\ HD\ WL.jpg &
 $HOME/.config/polybar/launch.sh &
 picom &
 
@@ -20,6 +22,7 @@ bspc config gapless_monocle      true
 
 bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a Chromium desktop='^1'
+bspc rule -a Falkon desktop='^1'
 bspc rule -a Vlc state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
