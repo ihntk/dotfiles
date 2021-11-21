@@ -3,3 +3,4 @@ MenuBar=Disabled
 
 [General]
 GlobalViewProps=true
+RememberOpenedTabs=false
