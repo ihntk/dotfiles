@@ -2,9 +2,9 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
-usr/bin/lxqt-policykit-agent &
-usr/bin/lxqt-powermanagement &
-usr/bin/lxqt-notificationd &
+lxqt-policykit-agent &
+lxqt-powermanagement &
+lxqt-notificationd &
 nm-tray &
 # xiccd &
 xwallpaper --zoom /usr/share/backgrounds/KDE\ Plasma\ Dark\ 285\ HD\ WL.jpg &
