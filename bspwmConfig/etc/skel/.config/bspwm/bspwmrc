@@ -2,10 +2,24 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
+# lxqt based
 lxqt-policykit-agent &
 lxqt-powermanagement &
 lxqt-notificationd &
 nm-tray &
+
+# plasma based
+export QT_QPA_PLATFORMTHEME=kde
+/usr/lib/polkit-kde-authentication-agent-1 &
+/usr/lib/org_kde_powerdevil &
+
+# xfce4 based
+usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+xfce4-power-manager &
+usr/lib/xfce4/notifyd/xfce4-notifyd &
+nm-applet &
+
+# dunst
 # xiccd &
 xwallpaper --zoom /usr/share/backgrounds/KDE\ Plasma\ Dark\ 285\ HD\ WL.jpg &
 $HOME/.config/polybar/launch.sh &
