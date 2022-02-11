@@ -158,7 +158,7 @@ $ADD_INSTALL sh 04-additionalInstall.sh
 # ------- add user
 # groupadd -g $GROUP_ID $AD_GROUP
 useradd -m -g users -G $GROUPSS $USER_ID -s /bin/zsh $USERNAME # Создание нового пользователя
-sh -c "sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers"
+sh -c "sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g' /etc/sudoers"
 
 # ------- Password
 # echo "$USERNAME:$PASSPHRASE" | chpasswd # Пароль для пользователя
