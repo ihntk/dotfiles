@@ -60,3 +60,24 @@ visibility=ActiveMaximizedWindow
 [Containments][2][General]
 AppletOrder=3;9;5;23;4;6;8;20
 
+[Containments][42]
+activityId=
+formfactor=2
+immutability=1
+lastScreen=0
+location=4
+plugin=org.kde.panel
+wallpaperplugin=org.kde.image
+
+[Containments][42][Applets][44]
+immutability=1
+plugin=org.kde.plasma.icontasks
+
+[Containments][42][Applets][44][Configuration][General]
+launchers=applications:org.kde.konsole.desktop,preferred://filemanager,applications:org.kde.kate.desktop,preferred://browser
+showOnlyCurrentDesktop=false
+
+
+[Containments][42][General]
+AppletOrder=44
+

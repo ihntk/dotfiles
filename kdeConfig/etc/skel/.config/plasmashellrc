@@ -3,3 +3,14 @@ thickness=24
 
 [PlasmaViews][Panel 2][Horizontal1600]
 thickness=22
+
+[PlasmaViews][Panel 42]
+alignment=132
+floating=1
+panelVisibility=2
+
+[PlasmaViews][Panel 42][Defaults]
+maxLength=1144
+minLength=123
+offset=0
+thickness=50
