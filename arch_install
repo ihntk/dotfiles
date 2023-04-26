@@ -144,6 +144,7 @@ git clone https://Igor-slacker@bitbucket.org/Igor-slacker/dotfiles.git
 cp -r dotfiles/defaultConfig/* /				# */
 
 cp -r dotfiles/kdeConfig/* /					# kde only!!! */
+rm /etc/skel/.config/fontconfig/fonts.conf		# kde only!!!
 
 cp -r dotfiles/xfceConfig/{etc,usr} /			# xfce only!!!
 sh dotfiles/xfceConfig/initEtcXdgXfce			# xfce only!!!
