@@ -11,6 +11,9 @@ wobblywindowsEnabled=true
 [TabBox]
 ShowTabBox=false
 
+[Windows]
+BorderlessMaximizedWindows=true
+
 [org.kde.kdecoration2]
 BorderSize=Normal
 ButtonsOnLeft=XIA

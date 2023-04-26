@@ -54,7 +54,6 @@ plugin=org.kde.windowbuttons
 [Containments][2][Applets][9][Configuration][General]
 buttons=5|3|4|10|2|9
 containmentType=Plasma
-disabledMaximizedBorders=NoBorders
 visibility=ActiveMaximizedWindow
 
 [Containments][2][General]
