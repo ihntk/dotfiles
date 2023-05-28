@@ -140,7 +140,7 @@ plank p7zip unrar appmenu-gtk-module \
 --noconfirm --quiet
 
 # ------- Copy dotfiles
-git clone https://Igor-slacker@bitbucket.org/Igor-slacker/dotfiles.git
+git clone git@github.com:ihntk/dotfiles.git
 cp -r dotfiles/defaultConfig/* /				# */
 
 cp -r dotfiles/kdeConfig/* /					# kde only!!! */
