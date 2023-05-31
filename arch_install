@@ -126,8 +126,10 @@ sh -c "sed -i 's/#Color/Color/' /etc/pacman.conf"
 # - remove kde or xfce line
 # - pcmanfm-gtk3 neovim libreoffice-fresh-uk \
 # - use ristretto insteasd of viewnior because the last one is gtk2 only!!!
+# - remove fonts during kde installation, kde install fonts as dependency
 pacman -S tree mc htop git openssh networkmanager sudo \
-ttf-liberation ttf-hack alacritty redshift \
+ttf-liberation ttf-hack \
+alacritty \
 xorg-server xf86-video-$VDRIVER \
 pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils \
 jack2 firefox-i18n-uk \
@@ -144,12 +146,13 @@ git clone git@github.com:ihntk/dotfiles.git
 cp -r dotfiles/defaultConfig/* /				# */
 
 cp -r dotfiles/kdeConfig/* /					# kde only!!! */
-rm /etc/skel/.config/fontconfig/fonts.conf		# kde only!!!
 
 cp -r dotfiles/xfceConfig/{etc,usr} /			# xfce only!!!
 sh dotfiles/xfceConfig/initEtcXdgXfce			# xfce only!!!
 
 cp -r dotfiles/bspwmConfig/* /                  # bspwm only!!! */
+
+cp -r dotfiles/soft/fontconfig/* /				# fontconfig */
 
 rm /etc/skel/*/.gitkeep
 
