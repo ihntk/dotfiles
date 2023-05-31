@@ -8,6 +8,11 @@ ToolButtonStyleOtherToolbars=NoText
 
 [General]
 ColorScheme=KritaDarker1
+fixed=Hack,12
+font=Sans Serif,12
+menuFont=Sans Serif,12
+smallestReadableFont=Sans Serif,10
+toolBarFont=Sans Serif,12
 
 [KDE]
 widgetStyle=kvantum-dark
