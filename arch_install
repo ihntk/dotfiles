@@ -124,15 +124,16 @@ sh -c "sed -i 's/#Color/Color/' /etc/pacman.conf"
 
 # ------- Installation
 # - remove kde or xfce line
-# - pcmanfm-gtk3 neovim libreoffice-fresh-uk \
+# - pcmanfm-gtk3 libreoffice-fresh-uk jack2 firefox-i18n-uk \
 # - use ristretto insteasd of viewnior because the last one is gtk2 only!!!
 # - remove fonts during kde installation, kde install fonts as dependency
 pacman -S tree mc htop git openssh networkmanager sudo \
 ttf-liberation ttf-hack \
 alacritty \
-xorg-server xf86-video-$VDRIVER \
-pulseaudio pulseaudio-alsa pavucontrol alsa-lib alsa-utils \
-jack2 firefox-i18n-uk \
+xorg-server xf86-video-$VDRIVER alsa-lib alsa-utils \
+pipewire pipewire-alsa pipewire-pulse pipewire-jack \
+pulseaudio pulseaudio-alsa \
+pavucontrol \
 bspwm sxhkd rofi dunst libnotify picom xwallpaper awesome-terminal-fonts qt5ct kvantum-qt5 lxqt-policykit lxqt-powermanagement lxqt-notificationd lxqt-archiver lximage-qt pcmanfm-qt screengrab featherpad \
 plasma-meta konsole dolphin-plugins ark okular kinfocenter kompare kfind ktorrent gwenview spectacle kcolorchooser vlc kolourpaint kdeconnect kmix kamoso lokalize filelight kcalc kcharselect kcron kvantum-qt5 plasma5-applets-window-buttons \
 xfce4-appfinder xfce4-panel xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver xfce4-screenshooter exo garcon xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin \
