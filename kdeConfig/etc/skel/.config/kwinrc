@@ -20,4 +20,4 @@ ButtonsOnLeft=XIA
 ButtonsOnRight=HSM
 CloseOnDoubleClickOnMenu=false
 library=org.kde.kwin.aurorae
-theme=__aurorae__svg__Breezemite
+theme=__aurorae__svg__Breezemite_dark
