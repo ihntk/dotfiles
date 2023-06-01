@@ -129,6 +129,7 @@ sh -c "sed -i 's/#Color/Color/' /etc/pacman.conf"
 # - remove fonts during kde installation, kde install fonts as dependency
 pacman -S tree mc htop git openssh networkmanager sudo \
 ttf-liberation ttf-hack \
+noto-fonts \
 alacritty \
 xorg-server xf86-video-$VDRIVER alsa-lib alsa-utils \
 pipewire pipewire-alsa pipewire-pulse pipewire-jack \
