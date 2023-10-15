@@ -215,8 +215,8 @@ tar -C /usr/share/themes/ -xf XFCE_Colour_Lite.tar.gz XFCE_Colour_Lite
 # gtk3 theme
 echo -e "gtk-cursor-theme-name=breeze_cursors\ngtk-modules=colorreload-gtk-module:window-decorations-gtk-module\ngtk-theme-name=Mojave-light\n" >> /etc/skel/.config/gtk-3.0/settings.ini
 
-# qt theme
-echo -e "export QT_QPA_PLATFORMTHEME=qt5ct\n" >> /etc/skel/.profile
+# qt theme for bspwm and kde plasma
+echo -e "export QT_QPA_PLATFORMTHEME=qt6ct\n" >> /etc/skel/.profile
 
 # lightdm theme
 sh -c "sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf"
