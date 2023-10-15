@@ -2,10 +2,17 @@
 icon=battery-charging
 
 [AC][DPMSControl]
-idleTime=900
+idleTime=600
 
 [AC][HandleButtonEvents]
 lidAction=1
-powerButtonAction=16
+powerButtonAction=1
 triggerLidActionWhenExternalMonitorPresent=false
 
+[Battery][DPMSControl]
+idleTime=360
+
+[Battery][HandleButtonEvents]
+lidAction=1
+powerButtonAction=1
+triggerLidActionWhenExternalMonitorPresent=false
