@@ -33,6 +33,7 @@ AD_GROUP="" # additional group
 GROUP_ID="" # uncomment groupadd before useradd
 GROUPSS="wheel" # "wheel,$AD_GROUP" "gp1,gp2" => uncomment groupadd before useradd
 
+# Add setfont to the BINARIES array in /etc/mkinicpio.conf
 CONSOLE_FONT="cyr-sun16" # "ter-v18b" for leptop or "ter-v16n" => Add terminus-font to pacstrap
 VDRIVER="vmware" # "vmware" "intel" "amdgpu" "ati" "nouveau" "xorg-drivers"
 SSD="" # ",discard"
@@ -100,6 +101,7 @@ echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && echo "uk_UA.UTF-8 UTF-8" >> /etc/l
 locale-gen
 echo "LANG=uk_UA.UTF-8" > /etc/locale.conf
 echo "FONT=$CONSOLE_FONT" > /etc/vconsole.conf
+sh -c "sed -i 's/BINARIES=()/BINARIES=(setfont)/' /etc/mkinicpio.conf"
 
 # ------- Time
 ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
