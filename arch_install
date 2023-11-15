@@ -114,7 +114,7 @@ echo -e "127.0.0.1	localhost\n::1		localhost\n127.0.1.1	$HOST_NAME.$DOMAIN	$HOST
 # ------- Grub
 sh -c "sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub"
 echo "GRUB_THEME=/usr/share/grub/themes/Vimix/theme.txt" >> /etc/default/grub
-grub-install /dev/sdw
+grub-install
 grub-mkconfig -o /boot/grub/grub.cfg
 # echo -e "MODULES=(btrfs nvme nvidia)\nHOOKS=(autodetect systemd)\nCOMPRESSION=\"cat\"" > /etc/mkinitcpio.conf
 # mkinitcpio -p linux-lts # Создание образа ранней загрузки
