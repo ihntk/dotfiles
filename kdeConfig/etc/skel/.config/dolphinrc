@@ -1,6 +1,13 @@
-[MainWindow]
-MenuBar=Disabled
+update_info=dolphin_detailsmodesettings.upd:rename-leading-padding,dolphin_detailsmodesettings.upd:move-content-display
+
+[CompactMode]
+PreviewSize=22
+
+[DetailsMode]
+PreviewSize=22
 
 [General]
-GlobalViewProps=true
+ConfirmClosingMultipleTabs=false
+GlobalViewProps=false
 RememberOpenedTabs=false
+
