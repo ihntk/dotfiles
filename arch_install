@@ -122,6 +122,8 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 # ------- Pacman
 sh -c "sed -i 's/#Color/Color/' /etc/pacman.conf"
+sh -c "sed -i 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf"
+
 # sh -c "sed -i '/\[multilib\]/,/Include/s/^[ ]*#//' /etc/pacman.conf"
 
 # ------- Installation
@@ -140,7 +142,7 @@ pavucontrol \
 bspwm sxhkd rofi dunst libnotify picom xwallpaper awesome-terminal-fonts qt6ct kvantum lxqt-policykit lxqt-powermanagement lxqt-notificationd lxqt-archiver lximage-qt pcmanfm-qt screengrab featherpad \
 colord-kde flatpak-kcm \
 plasma-meta konsole dolphin-plugins ark okular kinfocenter kompare kfind gwenview spectacle kcolorchooser kolourpaint kdeconnect kmix kamoso lokalize filelight kcalc kcharselect kcron kwalletmanager krecorder qt6ct kvantum plasma5-applets-window-buttons kio-gdrive \
-xfce4-appfinder xfce4-panel xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver xfce4-screenshooter exo garcon xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin \
+xfce4-appfinder xfce4-panel xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver xfce4-screenshooter exo garcon xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin arc-icon-theme \
 thunar thunar-volman tumbler thunar-archive-plugin thunar-media-tags-plugin \
 network-manager-applet lightdm-gtk-greeter-settings gvfs ristretto catfish file-roller \
 plank p7zip unrar appmenu-gtk-module \
@@ -206,23 +208,23 @@ set -e
 
 # xfce default theme
 echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xfwm4" version="1.0">\n  <property name="general" type="empty">\n    <property name="theme" type="string" value="Mojave-light"/>\n  </property>\n</channel>\n' > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml
-echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xsettings" version="1.0">\n  <property name="Net" type="empty">\n    <property name="ThemeName" type="string" value="Mojave-light"/>\n    <property name="IconThemeName" type="string" value="Luna-Light"/>\n  </property>\n</channel>\n' > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
+echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xsettings" version="1.0">\n  <property name="Net" type="empty">\n    <property name="ThemeName" type="string" value="Mojave-light"/>\n    <property name="IconThemeName" type="string" value="Arc"/>\n  </property>\n</channel>\n' > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 sh -c "sed -i 's/name=\"CursorThemeName\" type=\"string\" value=\"\"/name=\"CursorThemeName\" type=\"string\" value=\"breeze_cursors\"/' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
 
 echo "installing gtk themes and icons"
-tar -C /usr/share/icons/ -xf Luna-Icons.tar.xz Luna Luna-Light
 tar -C /usr/share/themes/ -xf Mojave-light.tar.xz
 tar -C /usr/share/themes/ -xf XFCE_Colour_Lite.tar.gz XFCE_Colour_Lite
 
 # gtk3 theme
-echo -e "gtk-cursor-theme-name=breeze_cursors\ngtk-modules=colorreload-gtk-module:window-decorations-gtk-module\ngtk-theme-name=Mojave-light\n" >> /etc/skel/.config/gtk-3.0/settings.ini
-
-# qt theme for bspwm and kde plasma
+echo -e "gtk-cursor-theme-name=breeze_cursors\ngtk-theme-name=Mojave-light\n" >> /etc/skel/.config/gtk-3.0/settings.ini
+# icons theme for xfce!!!
+echo -e "gtk-icon-theme-name=Arc\n" >> /etc/skel/.config/gtk-3.0/settings.ini
+# qt theme for kde plasma
 echo -e "export QT_QPA_PLATFORMTHEME=qt6ct\n" >> /etc/skel/.profile
 
 # lightdm theme
 sh -c "sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf"
-echo -e 'cursor-theme-name = breeze_cursors\ntheme-name = Mojave-light\nbackground = #204a87\nicon-theme-name = Luna-Light\nposition = 50%,end 50%,start\n' >> /etc/lightdm/lightdm-gtk-greeter.conf
+echo -e 'cursor-theme-name = breeze_cursors\ntheme-name = Mojave-light\nbackground = #204a87\nicon-theme-name = Arc\nposition = 50%,end 50%,start\n' >> /etc/lightdm/lightdm-gtk-greeter.conf
 
 EOF
 
