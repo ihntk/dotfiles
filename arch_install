@@ -148,6 +148,8 @@ network-manager-applet lightdm-gtk-greeter-settings gvfs ristretto catfish file-
 plank p7zip unrar appmenu-gtk-module \
 --noconfirm --quiet
 
+$ADD_INSTALL sh 04-additionalInstall.sh
+
 # ------- Copy dotfiles
 git clone https://github.com/ihntk/dotfiles.git
 cp -r dotfiles/defaultConfig/* /				# */
@@ -161,10 +163,11 @@ cp -r dotfiles/bspwmConfig/* /                  # bspwm only!!! */
 
 cp -r dotfiles/soft/fontconfig/* /				# fontconfig */
 
+sh soft/lite-xl/initSettings				# lite-xl settings
+
 rm /etc/skel/*/.gitkeep
 
 $THEMING sh 03-setupThemes.sh
-$ADD_INSTALL sh 04-additionalInstall.sh
 
 # ------- add user
 # groupadd -g $GROUP_ID $AD_GROUP
@@ -247,10 +250,11 @@ set -e
 # yay -S pcloudcc
 # yay -S xcursor-breeze
 
-pacman -U vala-panel-appmenu* \
-breeze-cursor xiccd \
-neovim-fugitive neovim-airline neovim-airline-gruvbox-material-git neovim-gruvbox-material-git \
-polybar xiccd \
+pacman -U lite-xl* \
+vala-panel-appmenu* \
+breeze-cursor* xiccd* \
+neovim-fugitive* neovim-airline* neovim-airline-gruvbox-material-git* neovim-gruvbox-material-git* \
+polybar* xiccd* \
 --noconfirm
 
 # systemctl --user enable --now redshift
