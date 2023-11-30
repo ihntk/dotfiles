@@ -163,7 +163,7 @@ cp -r dotfiles/bspwmConfig/* /                  # bspwm only!!! */
 
 cp -r dotfiles/soft/fontconfig/* /				# fontconfig */
 
-sh soft/lite-xl/initSettings				# lite-xl settings
+sh dotfiles/soft/lite-xl/initSettings			# lite-xl settings
 
 rm /etc/skel/*/.gitkeep
 
