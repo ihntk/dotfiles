@@ -9,7 +9,10 @@ Rows=3
 wobblywindowsEnabled=true
 
 [TabBox]
-ShowTabBox=false
+LayoutName=big_icons
+
+[TabBoxAlternative]
+LayoutName=present_windows
 
 [Windows]
 BorderlessMaximizedWindows=true
