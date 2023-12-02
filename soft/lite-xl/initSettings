@@ -1,3 +1,25 @@
 #!/bin/bash
-cp dotfiles/soft/lite-xl/plugins/* /usr/share/lite-xl/plugins/
+CWD=$(pwd)
+$CWD/plugins
+cd $CWD/plugins
+
+curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/autoinsert.lua
+curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/bracketmatch.lua
+curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/cleanstart.lua
+curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/colorpreview.lua
+curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/fontconfig.lua
+curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/ipc.lua
+curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/language_fstab.lua
+curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/language_ini.lua
+curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/language_java.lua
+curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/language_psql.lua
+curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/language_sh.lua
+curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/language_ssh_config.lua
+curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/su_save.lua
+curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/togglesnakecamel.lua
+
+cd $CWD
+cp $CWD/plugins/* /usr/share/lite-xl/plugins/
 sed -i '3i SCALE = 1' /usr/share/lite-xl/core/style.lua
+rm -r $CWD/plugins
+
