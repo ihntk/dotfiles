@@ -151,7 +151,7 @@ plank p7zip unrar appmenu-gtk-module \
 $ADD_INSTALL sh 04-additionalInstall.sh
 
 # ------- Copy dotfiles
-git clone https://github.com/ihntk/dotfiles.git
+git clone --depth 1 https://github.com/ihntk/dotfiles.git
 cp -r dotfiles/defaultConfig/* /				# */
 
 cp -r dotfiles/kdeConfig/* /					# kde only!!! */
