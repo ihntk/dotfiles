@@ -131,7 +131,7 @@ sh -c "sed -i 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf"
 # - pcmanfm-gtk3 libreoffice-fresh-uk jack2 firefox-i18n-uk \
 # - use ristretto insteasd of viewnior because the last one is gtk2 only!!!
 # - remove fonts during kde installation, kde install fonts as dependency
-pacman -S tree less mc wget htop git openssh networkmanager sudo \
+pacman -S tree less mc htop git openssh networkmanager sudo \
 ttf-liberation ttf-hack \
 noto-fonts \
 alacritty \
@@ -155,13 +155,11 @@ git clone --depth 1 https://github.com/ihntk/dotfiles.git
 cp -r dotfiles/defaultConfig/* /				# */
 
 cp -r dotfiles/kdeConfig/* /					# kde only!!! */
+sh dotfiles/kdeConfig/initFileDialogPlasma
 
 cp -r dotfiles/xfceConfig/{etc,usr} /			# xfce only!!!
 sh dotfiles/xfceConfig/initEtcXdgXfce			# xfce only!!!
-
-cp -r dotfiles/bspwmConfig/* /                  # bspwm only!!! */
-
-cp -r dotfiles/soft/fontconfig/* /				# fontconfig */
+cp -r dotfiles/soft/fontconfig/* /				 # xfce only!!! fontconfig */
 
 sh dotfiles/soft/lite-xl/initSettings			# lite-xl settings
 
