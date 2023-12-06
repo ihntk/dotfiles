@@ -8,7 +8,6 @@ curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins
 curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/bracketmatch.lua
 curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/cleanstart.lua
 curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/colorpreview.lua
-curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/fontconfig.lua
 curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/ipc.lua
 curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/language_fstab.lua
 curl -O https://raw.githubusercontent.com/lite-xl/lite-xl-plugins/master/plugins/language_ini.lua
