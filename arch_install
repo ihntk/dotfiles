@@ -140,7 +140,7 @@ pipewire pipewire-alsa pipewire-pulse pipewire-jack \
 pulseaudio pulseaudio-alsa \
 pavucontrol \
 bspwm sxhkd rofi dunst libnotify picom xwallpaper awesome-terminal-fonts qt6ct kvantum lxqt-policykit lxqt-powermanagement lxqt-notificationd lxqt-archiver lximage-qt pcmanfm-qt screengrab featherpad \
-colord-kde flatpak-kcm \
+colord-kde flatpak-kcm qt6ct \
 plasma-meta konsole dolphin-plugins ark okular kinfocenter kompare kfind gwenview spectacle kcolorchooser kolourpaint kdeconnect kmix kamoso lokalize filelight kcalc kcharselect kcron kwalletmanager krecorder qt6ct kvantum plasma5-applets-window-buttons kio-gdrive \
 xfce4-appfinder xfce4-panel xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver xfce4-screenshooter exo garcon xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin arc-icon-theme \
 thunar thunar-volman tumbler thunar-archive-plugin thunar-media-tags-plugin \
@@ -155,7 +155,7 @@ git clone --depth 1 https://github.com/ihntk/dotfiles.git
 cp -r dotfiles/defaultConfig/* /				# */
 
 cp -r dotfiles/kdeConfig/* /					# kde only!!! */
-sh dotfiles/kdeConfig/initFileDialogPlasma
+sh dotfiles/kdeConfig/initPlasma			# kde only!!! */
 
 cp -r dotfiles/xfceConfig/{etc,usr} /			# xfce only!!!
 sh dotfiles/xfceConfig/initEtcXdgXfce			# xfce only!!!

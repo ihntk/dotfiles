@@ -1,0 +1,3 @@
+#!/bin/bash
+sh -c "echo -e 'export GTK_USE_PORTAL=1\nexport QT_QPA_PLATFORMTHEME=qt6ct' >> /etc/skel/.profile"
+
