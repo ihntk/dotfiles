@@ -15,8 +15,7 @@
 #	- годинник в utc
 #	- вибрати потрібні пакети
 #	- закоментувати непотрібне в autostart
-
-#	- install appmenu
+#  - видалити чи залишити установочні файли 01-install.sh, 02-setupChroot.sh
 
 # 	визначаємо драйвер відеокарти і підставляємо в уcтановку X
 # 	lspci | grep -e VGA -e 3D
@@ -26,7 +25,7 @@
 
 INSDIR="archInstaller"
 USERNAME="ih"
-USER_ID="" # "-u 1000"
+USER_ID="-u 1000" # ""
 PASSPHRASE="af"
 
 AD_GROUP="" # additional group
@@ -82,7 +81,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 mv ../$INSDIR /mnt/root/
 # cp -r ../$INSDIR /mnt/root/
 echo "go to /root/$INSDIR"
-arch-chroot /mnt /bin/bash
+arch-chroot /mnt /bin/zsh
 
 EOF
 
@@ -154,7 +153,7 @@ $ADD_INSTALL sh 04-additionalInstall.sh
 git clone --depth 1 https://github.com/ihntk/dotfiles.git
 cp -r dotfiles/defaultConfig/* /				# */
 
-cp -r dotfiles/kdeConfig/* /					# kde only!!! */
+cp -r dotfiles/kdeConfig/etc /					# kde only!!! */
 sh dotfiles/kdeConfig/initPlasma			# kde only!!! */
 
 cp -r dotfiles/xfceConfig/{etc,usr} /			# xfce only!!!
@@ -189,7 +188,6 @@ cd /root
 # rm $INSDIR/{01-install.sh,02-setupChroot.sh}
 mv /root/$INSDIR /home/$USERNAME/
 chown -hR $USERNAME:users /home/$USERNAME/$INSDIR
-chsh -s /bin/zsh
 echo "  -- installation is finished --  "
 
 EOF
@@ -267,13 +265,13 @@ set -e
 	# Wipe the MBR:
   	dd if=/dev/zero of=/dev/sdw bs=512 count=1
 
-  	# 20M efi + 1 partition
+  	# 62M efi + 1 partition
 	/sbin/fdisk /dev/sdw << EOf
 	g
 	n
 	1
 
-	+20M
+	+62M
 	t
 	1
 	n
