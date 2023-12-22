@@ -32,8 +32,6 @@ AD_GROUP="" # additional group
 GROUP_ID="" # uncomment groupadd before useradd
 GROUPSS="wheel" # "wheel,$AD_GROUP" "gp1,gp2" => uncomment groupadd before useradd
 
-# Add setfont to the BINARIES array in /etc/mkinicpio.conf | console font is disabled!
-# CONSOLE_FONT="cyr-sun16" # "ter-v18b" for leptop or "ter-v16n" => Add terminus-font to pacstrap
 VDRIVER="vmware" # "vmware" "intel" "amdgpu" "ati" "nouveau" "xorg-drivers"
 SSD="" # ",discard"
 
@@ -78,8 +76,10 @@ mount -o noatime$SSD /dev/sdw3 /mnt/home
 pacstrap -i /mnt base mkinitcpio linux-lts linux-firmware grub grub-theme-vimix efibootmgr neovim grml-zsh-config
 genfstab -U /mnt >> /mnt/etc/fstab
 
+# select one of these options
 mv ../$INSDIR /mnt/root/
 # cp -r ../$INSDIR /mnt/root/
+
 echo "go to /root/$INSDIR"
 arch-chroot /mnt /bin/zsh
 
@@ -99,8 +99,6 @@ set -e
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && echo "uk_UA.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
 echo "LANG=uk_UA.UTF-8" > /etc/locale.conf
-# echo "FONT=$CONSOLE_FONT" > /etc/vconsole.conf
-# sh -c "sed -i 's/BINARIES=()/BINARIES=(setfont)/' /etc/mkinicpio.conf"
 
 # ------- Time
 ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
@@ -115,15 +113,11 @@ sh -c "sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub"
 echo "GRUB_THEME=/usr/share/grub/themes/Vimix/theme.txt" >> /etc/default/grub
 grub-install
 grub-mkconfig -o /boot/grub/grub.cfg
-# echo -e "MODULES=(btrfs nvme nvidia)\nHOOKS=(autodetect systemd)\nCOMPRESSION=\"cat\"" > /etc/mkinitcpio.conf
-# mkinitcpio -p linux-lts # Создание образа ранней загрузки
-# efibootmgr -d /dev/nvme0n1 -p 1 -c -L "Arch Linux" -l /vmlinuz-linux -u "root=/dev/nvme0n1p2 rw quiet rootflags=subvol=@root initrd=/intel-ucode.img initrd=/initramfs-linux.img"
 
 # ------- Pacman
 sh -c "sed -i 's/#Color/Color/' /etc/pacman.conf"
 sh -c "sed -i 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf"
 
-# sh -c "sed -i '/\[multilib\]/,/Include/s/^[ ]*#//' /etc/pacman.conf"
 
 # ------- Installation
 # - remove kde or xfce line
@@ -172,7 +166,7 @@ useradd -m -g users -G $GROUPSS $USER_ID -s /bin/zsh $USERNAME # Создани�
 sh -c "sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g' /etc/sudoers"
 
 # ------- Password
-# echo "$USERNAME:$PASSPHRASE" | chpasswd # Пароль для пользователя
+# echo "$USERNAME:$PASSPHRASE" | chpasswd # Пароль користувача
 
 echo "set password"
 passwd $USERNAME
@@ -191,9 +185,6 @@ chown -hR $USERNAME:users /home/$USERNAME/$INSDIR
 echo "  -- installation is finished --  "
 
 EOF
-
-# pacman -S nvidia nvidia-settings nvidia-utils opencl-nvidia opencl-headers lib32-nvidia-utils lib32-opencl-nvidia --noconfirm --noprogressbar --quiet # Установка драйверов Nvidia
-# yay -S nvidia-340xx-lts-dkms
 
 
 ############
@@ -249,11 +240,10 @@ set -e
 pacman -U lite-xl* \
 vala-panel-appmenu* \
 breeze-cursor* xiccd* \
-neovim-fugitive* neovim-airline* neovim-airline-gruvbox-material-git* neovim-gruvbox-material-git* \
+neovim-fugitive* neovim-airline* neovim-gruvbox-material-git* \
 polybar* xiccd* \
 --noconfirm
 
-# systemctl --user enable --now redshift
 # systemctl --user enable --now pcloud
 
 EOF
@@ -287,3 +277,21 @@ EOF
 rm ../arch_install
 echo "copy packages to $INSDIR"
 # mv ../!($INSDIR) $INSDIR/
+
+
+# ===
+# Add setfont to the BINARIES array in /etc/mkinicpio.conf | console font is disabled!
+# CONSOLE_FONT="cyr-sun16" # "ter-v18b" for leptop or "ter-v16n" => Add terminus-font to pacstrap
+
+# echo "FONT=$CONSOLE_FONT" > /etc/vconsole.conf
+# sh -c "sed -i 's/BINARIES=()/BINARIES=(setfont)/' /etc/mkinicpio.conf"
+
+# sh -c "sed -i '/\[multilib\]/,/Include/s/^[ ]*#//' /etc/pacman.conf"
+
+# pacman -S nvidia nvidia-settings nvidia-utils opencl-nvidia opencl-headers lib32-nvidia-utils lib32-opencl-nvidia --noconfirm --noprogressbar --quiet # Установка драйверов Nvidia
+# yay -S nvidia-340xx-lts-dkms
+
+# echo -e "MODULES=(btrfs nvme nvidia)\nHOOKS=(autodetect systemd)\nCOMPRESSION=\"cat\"" > /etc/mkinitcpio.conf
+# mkinitcpio -p linux-lts # Создание образа ранней загрузки
+# efibootmgr -d /dev/nvme0n1 -p 1 -c -L "Arch Linux" -l /vmlinuz-linux -u "root=/dev/nvme0n1p2 rw quiet rootflags=subvol=@root initrd=/intel-ucode.img initrd=/initramfs-linux.img"
+
