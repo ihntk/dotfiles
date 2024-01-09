@@ -9,10 +9,10 @@ ToolButtonStyleOtherToolbars=NoText
 [General]
 ColorScheme=KritaDarker1
 fixed=Hack,12
-font=Sans Serif,12
-menuFont=Sans Serif,12
-smallestReadableFont=Sans Serif,10
-toolBarFont=Sans Serif,12
+font=Noto Sans,12
+menuFont=Noto Sans,12
+smallestReadableFont=Noto Sans,10
+toolBarFont=Noto Sans,12
 
 [KDE]
 widgetStyle=kvantum-dark
