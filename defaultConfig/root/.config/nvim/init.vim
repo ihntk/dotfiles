@@ -8,6 +8,7 @@ set smartindent
 
 set ruler
 set noswapfile
+set nu
 set rnu
 set ignorecase
 set background=dark
