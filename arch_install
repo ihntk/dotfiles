@@ -65,7 +65,7 @@ $PARTITION sh 05-partition.sh
 $FORMAT mkfs.ext4 /dev/sdw2
 mount -o noatime$SSD /dev/sdw2 /mnt
 
-$FORMAT mkfs.fat -F32 /dev/sdw1
+$FORMAT mkfs.fat -F 32 /dev/sdw1
 mkdir -p /mnt/boot/efi
 mount -o noatime$SSD /dev/sdw1 /mnt/boot/efi
 
@@ -73,8 +73,33 @@ $FORMAT mkfs.ext4 /dev/sdw3
 mkdir -p /mnt/home
 mount -o noatime$SSD /dev/sdw3 /mnt/home
 
-pacstrap -i /mnt base mkinitcpio linux-lts linux-firmware grub grub-theme-vimix efibootmgr neovim grml-zsh-config
+
+# ------- Installation
+# - remove kde or xfce line
+# - pcmanfm-gtk3 libreoffice-fresh-uk jack2 firefox-i18n-uk \
+# - use ristretto insteasd of viewnior because the last one is gtk2 only!!!
+# - remove fonts during kde installation, kde install fonts as dependency
+pacstrap -i /mnt base mkinitcpio linux-lts linux-firmware grub grub-theme-vimix efibootmgr neovim grml-zsh-config \
+tree less mc htop git openssh networkmanager sudo \
+ttf-liberation ttf-hack \
+noto-fonts \
+alacritty \
+xorg-server xf86-video-$VDRIVER alsa-lib alsa-utils mpv-mpris \
+pipewire pipewire-alsa pipewire-pulse pipewire-jack \
+pulseaudio pulseaudio-alsa \
+pavucontrol \
+bspwm sxhkd rofi dunst libnotify picom xwallpaper awesome-terminal-fonts qt6ct kvantum lxqt-policykit lxqt-powermanagement lxqt-notificationd lxqt-archiver lximage-qt pcmanfm-qt screengrab featherpad \
+colord-kde flatpak-kcm qt6ct \
+plasma-meta konsole dolphin-plugins ark okular kinfocenter kompare kfind gwenview spectacle kcolorchooser kolourpaint kdeconnect kmix kamoso lokalize filelight kcalc kcharselect kcron kwalletmanager krecorder qt6ct kvantum plasma5-applets-window-buttons kio-gdrive \
+xfce4-appfinder xfce4-panel xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver xfce4-screenshooter exo garcon xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin arc-icon-theme \
+thunar thunar-volman tumbler thunar-archive-plugin thunar-media-tags-plugin \
+network-manager-applet lightdm-gtk-greeter-settings gvfs ristretto catfish file-roller \
+plank p7zip unrar appmenu-gtk-module \
+--noconfirm --quiet
+
 genfstab -U /mnt >> /mnt/etc/fstab
+
+git clone --depth 1 https://github.com/ihntk/dotfiles.git
 
 # select one of these options
 mv ../$INSDIR /mnt/root/
@@ -119,32 +144,9 @@ sh -c "sed -i 's/#Color/Color/' /etc/pacman.conf"
 sh -c "sed -i 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf"
 
 
-# ------- Installation
-# - remove kde or xfce line
-# - pcmanfm-gtk3 libreoffice-fresh-uk jack2 firefox-i18n-uk \
-# - use ristretto insteasd of viewnior because the last one is gtk2 only!!!
-# - remove fonts during kde installation, kde install fonts as dependency
-pacman -S tree less mc htop git openssh networkmanager sudo \
-ttf-liberation ttf-hack \
-noto-fonts \
-alacritty \
-xorg-server xf86-video-$VDRIVER alsa-lib alsa-utils mpv-mpris \
-pipewire pipewire-alsa pipewire-pulse pipewire-jack \
-pulseaudio pulseaudio-alsa \
-pavucontrol \
-bspwm sxhkd rofi dunst libnotify picom xwallpaper awesome-terminal-fonts qt6ct kvantum lxqt-policykit lxqt-powermanagement lxqt-notificationd lxqt-archiver lximage-qt pcmanfm-qt screengrab featherpad \
-colord-kde flatpak-kcm qt6ct \
-plasma-meta konsole dolphin-plugins ark okular kinfocenter kompare kfind gwenview spectacle kcolorchooser kolourpaint kdeconnect kmix kamoso lokalize filelight kcalc kcharselect kcron kwalletmanager krecorder qt6ct kvantum plasma5-applets-window-buttons kio-gdrive \
-xfce4-appfinder xfce4-panel xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-clipman-plugin xfce4-mpc-plugin xfce4-notifyd xfce4-screensaver xfce4-screenshooter exo garcon xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin xfce4-xkb-plugin arc-icon-theme \
-thunar thunar-volman tumbler thunar-archive-plugin thunar-media-tags-plugin \
-network-manager-applet lightdm-gtk-greeter-settings gvfs ristretto catfish file-roller \
-plank p7zip unrar appmenu-gtk-module \
---noconfirm --quiet
-
 $ADD_INSTALL sh 04-additionalInstall.sh
 
 # ------- Copy dotfiles
-git clone --depth 1 https://github.com/ihntk/dotfiles.git
 cp -r dotfiles/defaultConfig/* /				# */
 
 cp -r dotfiles/kdeConfig/etc /					# kde only!!! */
