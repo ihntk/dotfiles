@@ -1,2 +1,2 @@
 # LOCAL PATHS
-export EDITOR='vim'
+export EDITOR='nvim'
