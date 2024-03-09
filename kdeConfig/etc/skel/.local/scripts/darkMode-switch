@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# I used https://github.com/chiyuki0325/kde-dark-mode/tree/main as example
+
+LIGHT_KVANTUM_THEME="McMojave"
+DARK_KVANTUM_THEME="McMojaveDark"
+
+LIGHT_GTK_THEME="Mojave-Light"
+DARK_GTK_THEME="Mojave-Dark"
+
+LIGHT_COLOR_SCHEME="BreezeLight"
+DARK_COLOR_SCHEME="KritaDarker1"
+
+LIGHT_ICON_THEME="breeze"
+DARK_ICON_THEME="breeze-dark"
+
+LIGHT_DECORATION_THEME="__aurorae__svg__Breezemite"
+DARK_DECORATION_THEME="__aurorae__svg__Breezemite_dark"
+
+function enable_dark_theme() {
+    rm -rf "$XDG_CONFIG_HOME/gtk-4.0/"*".css"
+    rm -rf "$XDG_CONFIG_HOME/gtk-3.0/"*".css"
+    plasma-apply-colorscheme "$DARK_COLOR_SCHEME"
+    /usr/lib/plasma-changeicons "$DARK_ICON_THEME"
+    /usr/lib/kwin-applywindowdecoration "$DARK_DECORATION_THEME"
+    gsettings set org.gnome.desktop.interface "gtk-theme" "$DARK_GTK_THEME"
+    gsettings set org.gnome.desktop.interface "color-scheme" "prefer-dark"
+    kvantummanager --set "$DARK_KVANTUM_THEME"
+}
+
+function enable_light_theme() {
+    rm -rf "$XDG_CONFIG_HOME/gtk-4.0/"*".css"
+    rm -rf "$XDG_CONFIG_HOME/gtk-3.0/"*".css"
+    plasma-apply-colorscheme "$LIGHT_COLOR_SCHEME"
+    /usr/lib/plasma-changeicons "$LIGHT_ICON_THEME"
+    /usr/lib/kwin-applywindowdecoration "$LIGHT_DECORATION_THEME"
+    gsettings set org.gnome.desktop.interface "gtk-theme" "$LIGHT_GTK_THEME"
+    gsettings set org.gnome.desktop.interface "color-scheme" "prefer-light"
+    kvantummanager --set "$LIGHT_KVANTUM_THEME"
+}
+
+function finalize() {
+    # Reload Qt widgets style?
+    python -c 'from PyQt6 import QtDBus as qd; StyleChanged = 2; SETTINGS_STYLE = 7; message: qd.QDBusMessage = qd.QDBusMessage.createSignal("/KGlobalSettings", "org.kde.KGlobalSettings","notifyChange"); message.setArguments({StyleChanged, SETTINGS_STYLE}); qd.QDBusConnection.sessionBus().send(message)'  # Reload Qt widgets style
+    qdbus org.kde.KWin /KWin "reconfigure"  # Reload KWin
+}
+
+function usage() {
+  echo "
+  usage: darkMode-switch [options]
+  options:
+     -h Print this help
+     -d Enable dark mode
+     -l Enable light mode
+  "
+  exit
+}
+
+if [ "$1" = "-h" ]; then usage; fi
+if [ "$1" = "-d" ]; then enable_dark_theme; finalize; exit; fi
+if [ "$1" = "-l" ]; then enable_light_theme; finalize; exit; fi
+if [ "$1" = "-s" ]; then exit; fi
+
+usage
