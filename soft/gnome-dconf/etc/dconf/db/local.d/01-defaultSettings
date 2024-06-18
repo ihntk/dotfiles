@@ -1,0 +1,32 @@
+[org/gnome/desktop/input-sources]
+mru-sources=[('xkb', 'us')]
+per-window=true
+sources=[('xkb', 'us'), ('xkb', 'ua')]
+
+[org/gnome/desktop/interface]
+cursor-theme='breeze_cursors'
+
+[org/gnome/desktop/peripherals/keyboard]
+numlock-state=true
+
+[org/gnome/desktop/peripherals/touchpad]
+tap-to-click=true
+two-finger-scrolling-enabled=true
+
+[org/gnome/desktop/wm/preferences]
+button-layout='close:'
+
+[org/gnome/epiphany]
+default-search-engine='Google'
+search-engine-providers=[{'url': <'https://www.google.com/search?q=%s'>, 'bang': <'!g'>, 'name': <'Google'>}]
+
+[org/gnome/nautilus/preferences]
+click-policy='single'
+
+[org/gnome/settings-daemon/plugins/color]
+night-light-enabled=true
+night-light-temperature=uint32 4000
+
+[org/gnome/shell]
+favorite-apps=['org.gnome.Epiphany.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Calendar.desktop', 'org.gnome.Music.desktop', 'org.gnome.Software.desktop', 'org.gnome.Console.desktop']
+welcome-dialog-last-shown-version='45.4'
