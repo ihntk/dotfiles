@@ -88,6 +88,7 @@ xorg-server xf86-video-$VDRIVER alsa-lib alsa-utils mpv-mpris \
 pipewire pipewire-alsa pipewire-pulse pipewire-jack \
 pulseaudio pulseaudio-alsa \
 pavucontrol \
+darkman \
 bspwm sxhkd rofi dunst libnotify picom xwallpaper awesome-terminal-fonts qt6ct kvantum lxqt-policykit lxqt-powermanagement lxqt-notificationd lxqt-archiver lximage-qt pcmanfm-qt screengrab featherpad \
 colord-kde flatpak-kcm qt6ct \
 plasma-meta konsole dolphin-plugins ark okular kinfocenter kompare kfind gwenview spectacle kcolorchooser kolourpaint kdeconnect kmix kamoso lokalize filelight kcalc kcharselect kcron kwalletmanager krecorder qt6ct kvantum plasma-applet-window-buttons kio-gdrive python-pyqt6 \
