@@ -89,6 +89,7 @@ pipewire pipewire-alsa pipewire-pulse pipewire-jack \
 pulseaudio pulseaudio-alsa \
 pavucontrol \
 darkman \
+baobab evince gdm gnome-backgrounds gnome-calculator gnome-calendar gnome-characters gnome-clocks gnome-color-manager gnome-connections gnome-console gnome-contacts gnome-control-center gnome-disk-utility gnome-font-viewer gnome-keyring gnome-logs gnome-menus gnome-remote-desktop gnome-session gnome-shell gnome-system-monitor gnome-user-share grilo-plugins gvfs gvfs-afc gvfs-dnssd gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-onedrive gvfs-smb gvfs-wsdd loupe nautilus orca rygel simple-scan snapshot sushi tecla tracker3-miners xdg-desktop-portal-gnome xdg-user-dirs-gtk gnome-shell-extension-caffeine dconf-editor file-roller gnome-themes-extra \
 bspwm sxhkd rofi dunst libnotify picom xwallpaper awesome-terminal-fonts qt6ct kvantum lxqt-policykit lxqt-powermanagement lxqt-notificationd lxqt-archiver lximage-qt pcmanfm-qt screengrab featherpad \
 colord-kde flatpak-kcm qt6ct \
 plasma-meta konsole dolphin-plugins ark okular kinfocenter kompare kfind gwenview spectacle kcolorchooser kolourpaint kdeconnect kmix kamoso lokalize filelight kcalc kcharselect kcron kwalletmanager krecorder qt6ct kvantum plasma-applet-window-buttons kio-gdrive python-pyqt6 \
