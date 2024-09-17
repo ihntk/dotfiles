@@ -26,6 +26,9 @@ sleep-display-battery=600
 sleep-inactive-ac-timeout=0
 sleep-inactive-battery-timeout=1800
 
+[org/cinnamon/settings-daemon/plugins/xsettings]
+menus-have-icons=true
+
 [org/gnome/desktop/interface]
 cursor-theme='breeze_cursors'
 font-name='Cantarell 10'
