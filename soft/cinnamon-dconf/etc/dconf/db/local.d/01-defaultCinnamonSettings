@@ -1,12 +1,31 @@
+[net/launchpad/plank/docks/dock1]
+alignment='center'
+dock-items=['nemo.dockitem', 'org.gnome.Terminal.dockitem', 'google-chrome.dockitem', 'org.lite_xl.lite_xl.dockitem']
+lock-items=true
+position='bottom'
+pressure-reveal=true
+zoom-enabled=true
+
+[org/cinnamon]
+enabled-applets=['panel1:left:0:menu@cinnamon.org:0', 'panel1:left:1:separator@cinnamon.org:1', 'panel1:right:3:systray@cinnamon.org:3', 'panel1:right:4:xapp-status@cinnamon.org:4', 'panel1:right:5:notifications@cinnamon.org:5', 'panel1:right:6:removable-drives@cinnamon.org:7', 'panel1:right:7:keyboard@cinnamon.org:8', 'panel1:right:8:favorites@cinnamon.org:9', 'panel1:right:9:network@cinnamon.org:10', 'panel1:right:10:sound@cinnamon.org:11', 'panel1:right:11:power@cinnamon.org:12', 'panel1:center:0:calendar@cinnamon.org:13', 'panel1:right:14:user@cinnamon.org:15', 'panel1:left:3:workspace-switcher@cinnamon.org:18']
+panels-enabled=['1:0:top']
+panels-height=['1:24']
+[org/cinnamon/desktop/background]
+picture-uri='file:///usr/share/backgrounds/KDE Plasma Dark 285 HD WL.jpg'
+
 [org/cinnamon/desktop/interface]
 cursor-theme='breeze_cursors'
 font-name='Cantarell 10'
-gtk-theme='Materia-dark-compact'
-icon-theme='Papirus'
+gtk-theme='Mojave-Light'
+icon-theme='Papirus-Light'
+monospace-font-name='FiraCode Nerd Font 10'
 text-scaling-factor=1.0
 
+[org/cinnamon/desktop/keybindings/media-keys]
+terminal=['<Primary><Alt>t', '<Super>Return']
+
 [org/cinnamon/desktop/wm/preferences]
-button-layout='close,minimize,maximize:menu'
+button-layout='close,minimize,maximize:'
 
 [org/cinnamon/desktop/wm/screensaver]
 lock-enabled=false
@@ -29,15 +48,19 @@ sleep-inactive-battery-timeout=1800
 [org/cinnamon/settings-daemon/plugins/xsettings]
 menus-have-icons=true
 
+[org/cinnamon/theme]
+name='Mojave-Light'
+
+
 [org/gnome/desktop/interface]
 cursor-theme='breeze_cursors'
 font-name='Cantarell 10'
-gtk-theme='Materia-dark-compact'
-icon-theme='Papirus'
-
+gtk-theme='Mojave-Light'
+icon-theme='Papirus-Light'
+monospace-font-name='FiraCode Nerd Font 10'
 
 [org/gnome/desktop/wm/preferences]
-button-layout='close,minimize,maximize:menu'
+button-layout='close,minimize,maximize:'
 
 [org/gnome/libgnomekbd/desktop]
 default-group=0
@@ -52,6 +75,7 @@ default-show-menubar=false
 menu-accelerator-enabled=false
 
 [org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+font='Monospace 12'
 scrollbar-policy='never'
 
 [org/nemo/preferences]
