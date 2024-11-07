@@ -89,6 +89,7 @@ pipewire pipewire-alsa pipewire-pulse pipewire-jack \
 pulseaudio pulseaudio-alsa \
 pavucontrol \
 darkman \
+cinnamon cinnamon-translations touchegg blueberry dconf-editor file-roller gnome-calculator gnome-disk-utility nemo-audio-tab nemo-emblems nemo-fileroller nemo-preview nemo-seahorse baobab seahorse gnome-terminal gnome-system-monitor ristretto gucharmap xreader \
 baobab evince gdm gnome-backgrounds gnome-calculator gnome-calendar gnome-characters gnome-clocks gnome-color-manager gnome-connections gnome-console gnome-contacts gnome-control-center gnome-disk-utility gnome-font-viewer gnome-keyring gnome-logs gnome-menus gnome-remote-desktop gnome-session gnome-shell gnome-system-monitor gnome-user-share grilo-plugins gvfs gvfs-afc gvfs-dnssd gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-onedrive gvfs-smb gvfs-wsdd loupe nautilus orca rygel simple-scan snapshot sushi tecla tracker3-miners xdg-desktop-portal-gnome xdg-user-dirs-gtk gnome-shell-extension-caffeine dconf-editor file-roller gnome-themes-extra \
 bspwm sxhkd rofi dunst libnotify picom xwallpaper awesome-terminal-fonts qt6ct kvantum lxqt-policykit lxqt-powermanagement lxqt-notificationd lxqt-archiver lximage-qt pcmanfm-qt screengrab featherpad \
 colord-kde flatpak-kcm qt6ct \
@@ -151,15 +152,30 @@ $ADD_INSTALL sh 04-additionalInstall.sh
 # ------- Copy dotfiles
 cp -r dotfiles/defaultConfig/* /				# */
 
-cp -r dotfiles/kdeConfig/etc /					# kde only!!! */
-sh dotfiles/kdeConfig/initPlasma			# kde only!!! */
+# --- cinnamon
+cp -r dotfiles/cinnamonConfig/etc /
+cp -r dotfiles/soft/fontconfig/etc/skel/.config/fontconfig/fonts-a.conf  /etc/fonts/conf.d/99-deafaul-fonts.conf
+cp -r dotfiles/soft/cinnamon-dconf/etc /
+dconf update
 
-cp -r dotfiles/xfceConfig/{etc,usr} /			# xfce only!!!
-sh dotfiles/xfceConfig/initEtcXdgXfce			# xfce only!!!
-cp -r dotfiles/soft/fontconfig/* /				 # xfce only!!! fontconfig */
+# --- gnome
+cp -r dotfiles/soft/gnome-dconf/etc /
+dconf update
 
-sh dotfiles/soft/lite-xl/initSettings			# lite-xl settings
+# --- kde
+cp -r dotfiles/kdeConfig/etc /
+sh dotfiles/kdeConfig/initPlasma
 
+# --- xfce
+cp -r dotfiles/xfceConfig/{etc,usr} /
+sh dotfiles/xfceConfig/initEtcXdgXfce
+cp dotfiles/soft/fontconfig/etc/skel/.config/fontconfig/fonts.conf  /etc/fonts/conf.d/99-deafaul-fonts.conf
+sh -c "sed -i 's/Hack/HackNerdFont/' /etc/fonts/conf.d/99-deafaul-fonts.conf"
+
+# --- lite-xl settings
+sh dotfiles/soft/lite-xl/initSettings
+
+# --- clear
 rm /etc/skel/*/.gitkeep
 
 $THEMING sh 03-setupThemes.sh
