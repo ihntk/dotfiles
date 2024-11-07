@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+GTK_THEME="Fluent-Dark-compact"
+QT_THEME="Fluent-dark"
+ICON_THEME="Papirus-Dark"
