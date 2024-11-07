@@ -16,7 +16,7 @@ picture-uri='file:///usr/share/backgrounds/KDE Plasma Dark 285 HD WL.jpg'
 [org/cinnamon/desktop/interface]
 cursor-theme='breeze_cursors'
 font-name='Cantarell 10'
-gtk-theme='Fluent-light'
+gtk-theme='Fluent-Light-compact'
 icon-theme='Papirus-Light'
 monospace-font-name='FiraCode Nerd Font 10'
 text-scaling-factor=1.0
@@ -49,13 +49,13 @@ sleep-inactive-battery-timeout=1800
 menus-have-icons=true
 
 [org/cinnamon/theme]
-name='Fluent-light'
+name='Fluent-Light-compact'
 
 
 [org/gnome/desktop/interface]
 cursor-theme='breeze_cursors'
 font-name='Cantarell 10'
-gtk-theme='Fluent-light'
+gtk-theme='Fluent-Light-compact'
 icon-theme='Papirus-Light'
 monospace-font-name='FiraCode Nerd Font 10'
 
