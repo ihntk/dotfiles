@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-source themes
+GTK_THEME="Fluent-Light-compact"
+QT_THEME="Fluent-light"
+ICON_THEME="Papirus-Light"
 
 gsettings set org.gnome.desktop.interface color-scheme prefer-light &
 gsettings set org.x.apps.portal color-scheme prefer-light &
