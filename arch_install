@@ -79,7 +79,7 @@ mount -o noatime$SSD /dev/sdw3 /mnt/home
 # - pcmanfm-gtk3 libreoffice-fresh-uk jack2 firefox-i18n-uk \
 # - use ristretto insteasd of viewnior because the last one is gtk2 only!!!
 # - remove fonts during kde installation, kde install fonts as dependency
-pacstrap -i /mnt base mkinitcpio linux-lts linux-firmware grub grub-theme-vimix efibootmgr neovim grml-zsh-config \
+pacstrap -i /mnt base mkinitcpio linux-lts linux-firmware grub grub-theme-vimix efibootmgr neovim zsh \
 tree less mc htop git openssh networkmanager sudo \
 ttf-liberation ttf-hack \
 noto-fonts \
