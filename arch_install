@@ -151,6 +151,7 @@ $ADD_INSTALL sh 04-additionalInstall.sh
 
 # ------- Copy dotfiles
 cp -r dotfiles/defaultConfig/* /				# */
+sh dotfiles/soft/zsh/setup.sh
 
 # --- cinnamon
 cp -r dotfiles/cinnamonConfig/etc /
