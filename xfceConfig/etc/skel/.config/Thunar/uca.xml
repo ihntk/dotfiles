@@ -5,7 +5,7 @@
 	<name>Відкрити термінал тут</name>
 	<unique-id>1513374835788786-1</unique-id>
 	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
-	<description>Приклад особливої дії</description>
+	<description>Відкрити термінал у поточному каталозі</description>
 	<patterns>*</patterns>
 	<startup-notify/>
 	<directories/>

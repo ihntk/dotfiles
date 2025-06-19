@@ -1,0 +1,5 @@
+[user]
+showWindowCount=true
+showPreviews=true
+middleButtonBehavior=1
+pinned=thunar;Alacritty;
