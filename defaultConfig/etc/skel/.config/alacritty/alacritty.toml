@@ -5,5 +5,5 @@ blinking = "On"
 x = 5
 y = 5
 
-# [fon# t]
-# size = 8#
+# [font]
+# size = 8

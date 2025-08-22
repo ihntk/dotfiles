@@ -81,6 +81,7 @@ mount -o noatime$SSD /dev/sdw3 /mnt/home
 # - remove fonts during kde installation, kde install fonts as dependency
 pacstrap -i /mnt base mkinitcpio linux-lts linux-firmware grub grub-theme-vimix efibootmgr neovim zsh \
 tree less mc htop git openssh networkmanager sudo \
+inter-font ttf-liberation ttf-firacode-nerd \
 ttf-liberation ttf-hack \
 noto-fonts \
 alacritty \
@@ -218,24 +219,21 @@ cat > 03-setupThemes.sh << EOF
 set -e
 
 # xfce default theme
-echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xfwm4" version="1.0">\n  <property name="general" type="empty">\n    <property name="theme" type="string" value="Mojave-light"/>\n  </property>\n</channel>\n' > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml
-echo -e '<?xml version="1.0" encoding="UTF-8"?>\n\n<channel name="xsettings" version="1.0">\n  <property name="Net" type="empty">\n    <property name="ThemeName" type="string" value="Mojave-light"/>\n    <property name="IconThemeName" type="string" value="Arc"/>\n  </property>\n</channel>\n' > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
-sh -c "sed -i 's/name=\"CursorThemeName\" type=\"string\" value=\"\"/name=\"CursorThemeName\" type=\"string\" value=\"breeze_cursors\"/' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
-
-echo "installing gtk themes and icons"
-tar -C /usr/share/themes/ -xf Mojave-light.tar.xz
-tar -C /usr/share/themes/ -xf XFCE_Colour_Lite.tar.gz XFCE_Colour_Lite
+sh -c "sed -i 's/name=\"theme\" type=\"string\" value=\"Default\"/name=\"theme\" type=\"string\" value=\"Fluent-Light-compact\"/' /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml"
+sh -c "sed -i 's/name=\"ThemeName\" type=\"string\" value=\"Adwaita\"/name=\"ThemeName\" type=\"string\" value=\"Fluent-Light-compact\"/' /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
+sh -c "sed -i 's/name=\"IconThemeName\" type=\"string\" value=\"elementary\"/name=\"IconThemeName\" type=\"string\" value=\"Papirus\"/' /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
+sh -c "sed -i 's/name=\"CursorThemeName\" type=\"string\" value=\"\"/name=\"CursorThemeName\" type=\"string\" value=\"breeze_cursors\"/' /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
 
 # gtk3 theme
-echo -e "gtk-cursor-theme-name=breeze_cursors\ngtk-theme-name=Mojave-light\n" >> /etc/skel/.config/gtk-3.0/settings.ini
+echo -e "gtk-cursor-theme-name=breeze_cursors\ngtk-theme-name=Fluent-Light-compact\n" >> /etc/skel/.config/gtk-3.0/settings.ini
 # icons theme for xfce!!!
-echo -e "gtk-icon-theme-name=Arc\n" >> /etc/skel/.config/gtk-3.0/settings.ini
+echo -e "gtk-icon-theme-name=Papirus\n" >> /etc/skel/.config/gtk-3.0/settings.ini
 # qt theme for kde plasma
 echo -e "export QT_QPA_PLATFORMTHEME=qt6ct\n" >> /etc/skel/.profile
 
 # lightdm theme
 sh -c "sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf"
-echo -e 'cursor-theme-name = breeze_cursors\ntheme-name = Mojave-light\nbackground = #204a87\nicon-theme-name = Arc\nposition = 50%,end 50%,start\n' >> /etc/lightdm/lightdm-gtk-greeter.conf
+echo -e 'cursor-theme-name = breeze_cursors\ntheme-name = Fluent-Light-compact\nbackground = #204a87\nicon-theme-name = Papirus\nposition = 50%,end 50%,start\n' >> /etc/lightdm/lightdm-gtk-greeter.conf
 
 EOF
 
