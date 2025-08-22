@@ -1,5 +1,9 @@
 NOCOR=${NOCOR:-0}
 
+setopt append_history
+setopt share_history
+setopt extended_history
+setopt histignorespace
 
 typeset -ga ls_options
 typeset -ga grep_options
