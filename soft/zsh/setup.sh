@@ -10,9 +10,9 @@ fi
 
 cp -r $WORK_DIR/.config $DIST_DIR/
 
-cp $WORK_DIR/.zshenv $DIST_DIR/
+cp $WORK_DIR/.zshrc $DIST_DIR/
 
-# If you want to use antidote, uncomment the following line and first two lines in the .zshrc file.
+# If you want to use antidote, uncomment the following line.
 # Also remove files from .config/zsh/zsrc.d, and fil the .zsh_plugins.txt file
 # git clone --depth=1 https://github.com/mattmc3/antidote.git $DIST_DIR/.config/zsh/.antidote
 
