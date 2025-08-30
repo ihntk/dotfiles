@@ -440,5 +440,8 @@ fi
 # Load local customizations
 source_if_exists "$HOME/.zshrc.local"
 
-# Final message (comment out for cleaner startup)
-# echo "🚀 ZSH loaded successfully!"
+# Initialize starship prompt if available
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init zsh)"
+fi
+
