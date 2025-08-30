@@ -86,10 +86,6 @@ export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 
-# Language and locale
-export LANG="${LANG:-en_US.UTF-8}"
-export LC_ALL="${LC_ALL:-en_US.UTF-8}"
-
 # ============================================================================
 # KEY BINDINGS
 # ============================================================================
