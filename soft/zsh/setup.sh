@@ -10,7 +10,6 @@ fi
 
 cp -r $WORK_DIR/.config $DIST_DIR/
 
-cp $WORK_DIR/.zshrc $DIST_DIR/
 
 # If you want to use antidote, uncomment the following line.
 # Also remove files from .config/zsh/zsrc.d, and fil the .zsh_plugins.txt file
