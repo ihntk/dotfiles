@@ -379,33 +379,27 @@ weather() {
 # Display help for per-command history feature
 zsh-help() {
     cat << 'EOF'
-ZSH Per-Command History Help
-============================
+ZSH Configuration Help
+----------------------
 
-This configuration provides enhanced history navigation that shows previous
-commands starting with what you've already typed when using arrow keys.
+Per-Command History:
+===================
+  ↑/↓ arrows    - Find commands starting with current text
+  Ctrl+P/N      - Alternative per-command history search
+  Alt+↑/↓       - Standard history navigation
+  Ctrl+R/S      - Interactive history search backward/forward
 
-Key Bindings:
-  ↑/↓ arrows    - Search backward/forward for commands starting with current text
-  Ctrl+P/N      - Alternative keys for per-command history search
-  Alt+↑/↓       - Standard ZSH history navigation (up-line-or-search)
-  Ctrl+R        - Interactive backward history search
-  Ctrl+S        - Interactive forward history search
+Example: Type "git" and press ↑ to see previous git commands.
+Set ENABLE_PER_COMMAND_HISTORY=0 to disable.
 
-How it works:
-  - Type part of a command and press ↑ to find matching history entries
-  - If you type "git a" and press ↑, it finds commands starting with "git a"
-  - If you just type "git" and press ↑, it finds commands starting with "git"
-  - Empty command line uses standard history navigation
+Useful Functions:
+================
 
-Examples:
-  1. Type "git" and press ↑ → shows previous git commands
-  2. Type "git add" and press ↑ → shows previous "git add" commands
-  3. Type "ssh user@host" and press ↑ → shows commands starting with that text
-
-Configuration:
-  Set ENABLE_PER_COMMAND_HISTORY=0 in your environment to disable this feature
-  and revert to standard ZSH history behavior.
+  extract <file>       - Extract various archive formats (tar, zip, 7z, etc.)
+  mkcd <dir>           - Create directory and cd into it
+  fkill [signal]       - Interactive process finder and killer using fzf
+  note                 - Quick note taking (opens today's note in editor)
+  weather [location]   - Show weather forecast (uses wttr.in)
 
 EOF
 }
