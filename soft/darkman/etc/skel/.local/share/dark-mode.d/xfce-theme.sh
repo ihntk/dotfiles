@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GTK_THEME="Mojave-Dark"
+GTK_THEME="Fluent-Dark-compact"
 ICON_THEME="Papirus-Dark"
 
 exec xfconf-query -c xsettings -p /Net/ThemeName -s $GTK_THEME &
