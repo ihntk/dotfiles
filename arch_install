@@ -89,7 +89,7 @@ xorg-server xf86-video-$VDRIVER alsa-lib alsa-utils mpv-mpris \
 pipewire pipewire-alsa pipewire-pulse pipewire-jack \
 pulseaudio pulseaudio-alsa \
 pavucontrol \
-darkman \
+darkman xdg-desktop-portal-gtk geoclue \
 cinnamon cinnamon-translations touchegg blueberry dconf-editor file-roller gnome-calculator gnome-disk-utility nemo-audio-tab nemo-emblems nemo-fileroller nemo-preview nemo-seahorse baobab seahorse gnome-terminal gnome-system-monitor ristretto gucharmap xreader \
 baobab evince gdm gnome-backgrounds gnome-calculator gnome-calendar gnome-characters gnome-clocks gnome-color-manager gnome-connections gnome-console gnome-contacts gnome-control-center gnome-disk-utility gnome-font-viewer gnome-keyring gnome-logs gnome-menus gnome-remote-desktop gnome-session gnome-shell gnome-system-monitor gnome-user-share grilo-plugins gvfs gvfs-afc gvfs-dnssd gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-onedrive gvfs-smb gvfs-wsdd loupe nautilus orca rygel simple-scan snapshot sushi tecla tracker3-miners xdg-desktop-portal-gnome xdg-user-dirs-gtk gnome-shell-extension-caffeine dconf-editor file-roller gnome-themes-extra \
 bspwm sxhkd rofi dunst libnotify picom xwallpaper awesome-terminal-fonts qt6ct kvantum lxqt-policykit lxqt-powermanagement lxqt-notificationd lxqt-archiver lximage-qt pcmanfm-qt screengrab featherpad \
