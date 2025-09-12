@@ -216,9 +216,9 @@ fi
 [[ -r /proc/mdstat ]] && alias mdstat='cat /proc/mdstat'
 
 # Safety aliases
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
+# alias rm='rm -i'
+# alias cp='cp -i'
+# alias mv='mv -i'
 
 # Modern alternatives (install them for better experience)
 # command -v bat >/dev/null && alias cat='bat --paging=never'
