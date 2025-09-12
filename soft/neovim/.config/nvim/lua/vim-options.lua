@@ -1,18 +1,26 @@
-vim.cmd("set tabstop=4")
-vim.cmd("set shiftwidth=4")
-vim.cmd("set softtabstop=4")
+-- Tabstops
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 
--- vim.cmd("set autoread")
--- vim.cmd("set autoindent")
--- vim.cmd("set smartindent")
- 
-vim.cmd("set ruler")
-vim.cmd("set nu")
-vim.cmd("set rnu")
-vim.cmd("set ignorecase")
--- vim.cmd("set noswapfile")
+-- Line numbers
+vim.opt.number = true
+vim.opt.relativenumber = true
 
-vim.keymap.set('n', 'J', ':bp<CR>', {})
-vim.keymap.set('n', 'K', ':bn<CR>', {})
+vim.opt.termguicolors = true
+
+-- Cursorline
+vim.opt.cursorline = true
+
+-- Show whitespace characters
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+-- Search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 vim.g.mapleader = " "
+vim.opt.clipboard = "unnamedplus"
+vim.opt.winborder = "rounded"
+vim.g.have_nerd_font = true
