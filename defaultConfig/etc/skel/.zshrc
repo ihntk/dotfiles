@@ -280,7 +280,7 @@ if [[ -f ~/.ssh/config ]]; then
 fi
 
 # Directory completion
-zstyle ':completion:*' special-dirs true
+zstyle ':completion:*' special-dirs false
 zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
 
 # Correction settings
@@ -434,4 +434,3 @@ source_if_exists "$HOME/.zshrc.local"
 if command -v starship >/dev/null 2>&1; then
     eval "$(starship init zsh)"
 fi
-
