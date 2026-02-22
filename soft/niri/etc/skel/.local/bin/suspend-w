@@ -1,0 +1,5 @@
+#!/bin/bash
+
+screen-lock &
+sleep 0.2
+systemctl suspend
