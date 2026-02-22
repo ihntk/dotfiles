@@ -1,0 +1,134 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 24,
+    "spacing": 4,
+
+    "modules-left": ["niri/workspaces", "niri/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["mpris", "tray", "pulseaudio", "backlight", "niri/language", "battery", "bluetooth", "custom/power"],
+
+    "niri/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active": "",
+            "default": ""
+        },
+        "on-click": "activate"
+    },
+
+    "niri/window": {
+        "format": "{title}",
+        "max-length": 50,
+        "rewrite": {
+            "(.*) — Mozilla Firefox": " $1",
+            "(.*) - Google Chrome": "   $1",
+            "(.*)Spotify": "󰓇   $1"
+        }
+    },
+
+    "clock": {
+        "format": "{:%d %B - %H:%M}",
+        "format-alt": "{:%A, %d %B %Y - %H:%M:%S}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "days": "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        }
+    },
+
+    "mpris": {
+        "format": "{player_icon} {dynamic}",
+        "format-paused": "{status_icon} {dynamic}",
+        "player-icons": {
+            "default": "▶",
+            "spotify": "",
+            "firefox": "",
+            "chrome": "",
+            "chromium": "",
+            "vlc": "󰕼",
+            "mpv": ""
+        },
+        "status-icons": {
+            "paused": "⏸",
+            "playing": "▶",
+            "stopped": "⏹"
+        },
+        "dynamic-order": ["title", "artist"],
+        "dynamic-separator": " - ",
+        "max-length": 50,
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-scroll-up": "playerctl previous",
+        "on-scroll-down": "playerctl next"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 {volume}%",
+        "format-icons": {
+            "default": ["󰕿 ", "󰖀 ", "󰕾 "]
+        },
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃞 ", "󰃟 ", "󰃠 "],
+        "on-scroll-up": "brightnessctl set 5%+",
+        "on-scroll-down": "brightnessctl set 5%- --min-value=5"
+    },
+
+    "niri/language": {
+        "format": "󰌌  {short}"
+    },
+
+    "bluetooth": {
+        "format": "󰂯",
+        "format-disabled": "󰂲",
+        "format-connected": "󰂱",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        // "on-click": "blueman-manager"
+        "on-click": "blueberry"
+    },
+
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}",
+        "format-full": "{icon}",
+        "format-charging": "󰂄 {capacity}% ",
+        "format-plugged": " {capacity}% ",
+        "format-alt": "{icon} {time} ",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": [" ", " ", " ", " ", " "]
+    },
+
+    "custom/power": {
+        "format": "⏻",
+        "tooltip": false,
+        "on-click": "nwg-bar"
+    }
+}
