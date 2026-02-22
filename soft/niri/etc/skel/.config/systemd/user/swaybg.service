@@ -4,5 +4,5 @@ After=graphical-session.target
 Requisite=graphical-session.target
 
 [Service]
-ExecStart=/usr/bin/swaybg -m fill -i "%h/Pictures/wallpaper/Frozen.jpg"
+ExecStart=/usr/bin/swaybg -m fill -i "/usr/share/backgrounds/KDE Plasma Dark 285 HD WL.jpg"
 Restart=on-failure
