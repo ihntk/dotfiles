@@ -1,0 +1,67 @@
+window {
+    background-color: rgba(41, 37, 34, 0.95);
+    color: #ECE1D7;
+    border-radius: 8px;
+    border: 2px solid #7F91B2;
+}
+
+button, image {
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+button {
+    padding: 20px;
+    margin: 5px;
+    background-color: rgba(52, 48, 44, 0.8);
+    border-radius: 8px;
+    color: #ECE1D7;
+    font-size: 13px;
+    font-family: Roboto;
+}
+
+button:hover {
+    background-color: rgba(127, 145, 178, 0.3);
+    color: #7F91B2;
+}
+
+button:focus {
+    background-color: rgba(127, 145, 178, 0.4);
+}
+
+#lock {
+    background-color: rgba(127, 145, 178, 0.2);
+}
+
+#lock:hover {
+    background-color: rgba(127, 145, 178, 0.4);
+    color: #7F91B2;
+}
+
+#logout {
+    background-color: rgba(235, 192, 109, 0.2);
+}
+
+#logout:hover {
+    background-color: rgba(235, 192, 109, 0.4);
+    color: #EBC06D;
+}
+
+#restart {
+    background-color: rgba(229, 155, 93, 0.2);
+}
+
+#restart:hover {
+    background-color: rgba(229, 155, 93, 0.4);
+    color: #E49B5D;
+}
+
+#shutdown {
+    background-color: rgba(212, 119, 102, 0.2);
+}
+
+#shutdown:hover {
+    background-color: rgba(212, 119, 102, 0.4);
+    color: #D47766;
+}
