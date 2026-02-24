@@ -13,6 +13,9 @@ panels-height=['1:24']
 [org/cinnamon/desktop/background]
 picture-uri='file:///usr/share/backgrounds/KDE Plasma Dark 285 HD WL.jpg'
 
+[org/cinnamon/desktop/applications/terminal]
+exec='xdg-terminal-exec'
+
 [org/cinnamon/desktop/interface]
 cursor-theme='breeze_cursors'
 font-name='Cantarell 10'
