@@ -89,7 +89,7 @@ layout {
 spawn-at-startup "waybar"
 spawn-at-startup "wlsunset" "-l" "50.45" "-L" "30.52" "-t" "4850" "-T" "5100"
 spawn-at-startup "mako"
-spawn-at-startup "wl-paste --watch cliphist store"
+spawn-sh-at-startup "wl-paste --watch cliphist store"
 
 prefer-no-csd
 
@@ -192,7 +192,7 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal" { spawn "xdg-terminal-exec"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: gtklock" { spawn "gtklock"; }
-    Alt+V { spawn "cliphist list | fuzzel --dmenu --line-height 14 -f :size=8 -a top-right | cliphist decode | wl-copy"; }
+    Alt+V { spawn-sh "cliphist list | fuzzel --dmenu --line-height 14 -f :size=8 -a top-right | cliphist decode | wl-copy"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
