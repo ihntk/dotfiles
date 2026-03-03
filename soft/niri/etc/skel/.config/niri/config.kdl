@@ -128,6 +128,11 @@ animations {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 
+window-rule {
+    match app-id="nemo"
+    default-window-height { proportion 0.5; }
+}
+
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
 window-rule {
@@ -192,7 +197,7 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal" { spawn "xdg-terminal-exec"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: gtklock" { spawn "gtklock"; }
-    Alt+V { spawn-sh "cliphist list | fuzzel --dmenu --line-height 14 -f :size=8 -a top-right | cliphist decode | wl-copy"; }
+    Alt+V { spawn-sh "cliphist list | fuzzel --dmenu --line-height 14 -f :size=8 -a top-right | cliphist decode | wl-copy && sleep 0.1 && wtype -M ctrl v -m ctrl"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
