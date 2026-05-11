@@ -12,9 +12,6 @@
     "editor.fontFamily": "'JetBrains Mono', 'VictorMono NF', 'FiraCode Nerd', monospace",
     "editor.fontLigatures": true,
     "editor.minimap.autohide": "mouseover",
-    "files.associations": {
-        "*.x86_64": "shellscript"
-    },
     // "files.autoSave": "afterDelay",
     "files.autoSaveWorkspaceFilesOnly": true,
     "files.insertFinalNewline": true,
